@@ -1,0 +1,70 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Chicken Breast Fillets, Boneless Marinated 6 Ounce Raw, Invivid",
+      "brand": "Hormel Black Labelmany",
+      "img": "/images/img1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Chicken Breast Fillets, Boneless Marinated 6 Ounce Raw, Invivid",
+      "brand": "Hormel Black Labelmany",
+      "img": "/images/img2.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "supplier": "East coast fruits & vegetables",
+      "shippingDate": "2012-04-23T18:25:43.511Z",
+      "categoryIDs" : [ 1, 2, 3, 4, 5, 6, 7, 8 ],
+      "department" : "300-444-678",
+      "status" : "awaiting",
+      "items" : [
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": []
+        },
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": []
+        },
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": []
+        },
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": []
+        },
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": []
+        },
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": []
+        }
+      ]
+    }
+  ]
+}
