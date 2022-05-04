@@ -1,16 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Navbar from './components/common/navbar';
-import { Fragment } from 'react';
 import Analytics from './components/pages/analytics';
 import Orders from './components/pages/orders';
 import Basket from './components/pages/basket';
 import Store from './components/pages/store';
 import Order from './components/pages/order';
+import { Body } from './components/styled/common';
 
 function App() {
 
   return (
-    <Fragment>
+    <Body>
       <Navbar />
       <Routes>
         <Route path="*" element={<Navigate to="/order/1" />} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/basket" element={<Basket />} />
       </Routes>
-    </Fragment>
+    </Body>
   );
 }
 

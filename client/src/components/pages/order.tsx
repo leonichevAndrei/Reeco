@@ -1,13 +1,13 @@
 import SubNavComponent from "../common/sub-nav-comp";
-import { Page } from "../styled/common";
 import OrderApprovement from "../order/order-approve";
+import { Fragment } from "react";
 
 export default function Order() {
 
     return (
-        <Page>
+        <Fragment>
             <SubNavComponent />
             <OrderApprovement />
-        </Page>
+        </Fragment>
     )
 }

@@ -1,13 +1,15 @@
-import { Page, UnderConst, UCTitle } from "../styled/common";
+import { SubNav, SubNavTop, SNLink, SubNavBottom, OrderNumber } from "../styled/sub-nav";
 
 export default function Store() {
 
     return (
-        <Page>
-            <UnderConst>
-                <UCTitle>Store page</UCTitle>
-                is under construction
-            </UnderConst>
-        </Page>
+        <SubNav style={{boxShadow: "0 -10px 20px"}}>
+            <SubNavTop>
+                <SNLink to="/store">Store</SNLink>
+            </SubNavTop>
+            <SubNavBottom>
+                <OrderNumber>Store page</OrderNumber>
+            </SubNavBottom>
+        </SubNav>
     );
 }

@@ -1,13 +1,15 @@
-import { Page, UnderConst, UCTitle } from "../styled/common";
+import { SubNav, SubNavTop, SNLink, SubNavBottom, OrderNumber } from "../styled/sub-nav";
 
 export default function Analytics() {
 
     return (
-        <Page>
-            <UnderConst>
-                <UCTitle>Analytics page</UCTitle>
-                is under construction
-            </UnderConst>
-        </Page>
+        <SubNav style={{boxShadow: "0 -10px 20px"}}>
+            <SubNavTop>
+                <SNLink to="/analytics">Analytics</SNLink>
+            </SubNavTop>
+            <SubNavBottom>
+                <OrderNumber>Analytics page</OrderNumber>
+            </SubNavBottom>
+        </SubNav>
     );
 }

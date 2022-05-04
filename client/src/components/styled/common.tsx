@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+export const Body = styled.div`
+    min-width: 100vw;
+    height: 100vh;
+    background-color: #ebebeb;
+    display: flex;
+    flex-direction: column;
+`;
+
 export const Page = styled.div`
     min-width: 100vw;
-    min-height: 100vh;
-    background-color: #ebebeb;
-`;
-
-export const UnderConst = styled.div`
-    padding: 5vh 0;
-`;
-
-export const UCTitle = styled.h3`
-`;
-
-export const ListTitle = styled.h3`
+    height: calc(100vh - 145px);
+    padding-bottom: 20px;
+    overflow: scroll;
+    z-index: 5;
 `;
 
 export const ListItem = styled(Link)`

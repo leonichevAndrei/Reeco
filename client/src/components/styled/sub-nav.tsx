@@ -3,8 +3,10 @@ import styled from "styled-components";
 
 export const SubNav = styled.div`
     background-color: white;
-    padding: 10px 10vw;
-    box-shadow: 2px;
+    padding: 15px 10vw;
+    border-bottom: 1px solid #cccccc;
+    height: 95px;
+    z-index: 10;
 `;
 
 export const SubNavTop = styled.div`

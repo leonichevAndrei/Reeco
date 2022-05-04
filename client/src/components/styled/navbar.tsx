@@ -6,8 +6,11 @@ import Dropdown from "../common/dropdown";
 export const Nav = styled.div`
     display: flex;
     flex-direction: row;
-    background-color: #336242;
-    padding: 1.5vh 10vw 1vh;
+    justify-content: space-between;
+    background-color: rgb(51, 98, 66);
+    padding: 13px 10vw 0;
+    height: 50px;
+    z-index: 15;
 `;
 
 export const Logo = styled.div`

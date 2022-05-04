@@ -3,7 +3,7 @@ import { OrderButtons, OrderNumber, SNLink, SubNav, SubNavBottom, SubNavTop } fr
 
 export default function SubNavComponent() {
     return (
-        <SubNav>
+        <SubNav style={{boxShadow: "0 -10px 20px"}}>
             <SubNavTop>
                 Orders &gt; <SNLink to="/order/1">Order 32457ABC</SNLink>
             </SubNavTop>

@@ -1,13 +1,15 @@
-import { Page, UnderConst, UCTitle } from "../styled/common";
+import { SubNav, SubNavTop, SNLink, SubNavBottom, OrderNumber } from "../styled/sub-nav";
 
 export default function Basket() {
 
     return (
-        <Page>
-            <UnderConst>
-                <UCTitle>Basket page</UCTitle>
-                is under construction
-            </UnderConst>
-        </Page>
+        <SubNav style={{boxShadow: "0 -10px 20px"}}>
+            <SubNavTop>
+                <SNLink to="/basket">Basket</SNLink>
+            </SubNavTop>
+            <SubNavBottom>
+                <OrderNumber>Basket page</OrderNumber>
+            </SubNavBottom>
+        </SubNav>
     );
 }
