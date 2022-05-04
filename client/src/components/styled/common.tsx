@@ -37,6 +37,7 @@ export const WhiteButton = styled(DefButton)`
     border-color: #336242;
     background-color: white;
     color: #336242;
+    height: 35px;
 `;
 
 export const GreenButton = styled(DefButton)`
