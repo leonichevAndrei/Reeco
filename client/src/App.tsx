@@ -5,6 +5,7 @@ import Analytics from './components/pages/analytics';
 import Orders from './components/pages/orders';
 import Basket from './components/pages/basket';
 import Store from './components/pages/store';
+import Order from './components/pages/order';
 
 function App() {
 
@@ -12,9 +13,10 @@ function App() {
     <Fragment>
       <Navbar />
       <Routes>
-        <Route path="*" element={<Navigate to="/basket" />} />
+        <Route path="*" element={<Navigate to="/order/1" />} />
         <Route path="/store" element={<Store />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/order/:id" element={<Order />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/basket" element={<Basket />} />
       </Routes>

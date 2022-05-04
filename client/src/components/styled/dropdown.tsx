@@ -18,11 +18,13 @@ export const DdTitle = styled.a`
 type DdBodyProps = {visible: boolean};
 
 export const DdBody = styled.div`
+    box-shadow: 2px 5px 15px -5px;
     position: absolute;
     background-color: white;
     width: 100%;
-    padding: 3px 5px;
-    display: ${(props : DdBodyProps) => props.visible === true ? "block" : "none"}
+    padding: 3px 5px 3px 10px;
+    display: ${(props : DdBodyProps) => props.visible === true ? "block" : "none"};
+    border-radius: 5px;
 `;
 
 export const DdElement = styled.a`

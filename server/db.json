@@ -27,42 +27,56 @@
           "price": 999,
           "quantity": 99,
           "status": "none",
-          "updated": []
+          "updated": [],
+          "updReason": ""
         },
         {
           "itemID": 1,
           "price": 999,
           "quantity": 99,
           "status": "none",
-          "updated": []
+          "updated": [],
+          "updReason": ""
         },
         {
           "itemID": 1,
           "price": 999,
           "quantity": 99,
           "status": "none",
-          "updated": []
+          "updated": [],
+          "updReason": ""
         },
         {
           "itemID": 1,
           "price": 999,
           "quantity": 99,
           "status": "none",
-          "updated": []
+          "updated": [],
+          "updReason": ""
         },
         {
           "itemID": 1,
           "price": 999,
           "quantity": 99,
           "status": "none",
-          "updated": []
+          "updated": [],
+          "updReason": ""
         },
         {
           "itemID": 1,
           "price": 999,
           "quantity": 99,
           "status": "none",
-          "updated": []
+          "updated": [],
+          "updReason": ""
+        },
+        {
+          "itemID": 1,
+          "price": 999,
+          "quantity": 99,
+          "status": "none",
+          "updated": [],
+          "updReason": ""
         }
       ]
     }

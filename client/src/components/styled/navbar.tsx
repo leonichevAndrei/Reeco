@@ -7,7 +7,7 @@ export const Nav = styled.div`
     display: flex;
     flex-direction: row;
     background-color: #336242;
-    padding: 1vh 10vw;
+    padding: 1.5vh 10vw 1vh;
 `;
 
 export const Logo = styled.div`
@@ -15,6 +15,8 @@ export const Logo = styled.div`
     color: white;
     font-weight: bold;
     font-size: 1.2em;
+    position: relative;
+    top: -3px;
 `;
 
 export const MyLinks = styled.div`

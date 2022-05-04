@@ -7,13 +7,14 @@ export default function Navbar() {
 
     const location = useLocation().pathname;
     const [page, setPage] = useState(location);
+    console.log(location);
 
     return (
         <Nav>
             <Logo>Reeco</Logo>
             <MyLinks>
                 <MyLink active={page === "/store"} to={"/store"} onClick={() => setPage("/store")}>Store</MyLink>
-                <MyLink active={page === "/orders"} to="/orders" onClick={() => setPage("/orders")}>Orders</MyLink>
+                <MyLink active={/^\/order(s\/[\d]*)?/.test(location)} to="/orders" onClick={() => setPage("/orders")}>Orders</MyLink>
                 <MyLink active={page === "/analytics"} to="/analytics" onClick={() => setPage("/analytics")}>Analytics</MyLink>
             </MyLinks>
             <Basket>
@@ -21,7 +22,7 @@ export default function Navbar() {
                     <BasketIcon size={22} /><BasketCount>5</BasketCount>
                 </BasketLink>
             </Basket>
-            <Dropdown text="Hello, James" list={["Action one", "Next action", "The end"]} />
+            <Dropdown text="Hello, James" list={["Action one", "Next action", "Final option"]} />
         </Nav>
     );
 }
