@@ -45,3 +45,20 @@ export const GreenButton = styled(DefButton)`
     background-color: #336242;
     color: white;
 `;
+
+export const ButtonDivider = styled.div`
+    height: 35px;
+    width: 15px;
+`;
+
+export const DefaultInput = styled.input`
+    border: 1px solid #ebebeb;
+    width: 100%;
+    border-radius: 20px;
+    height: 35px;
+    padding: 0 10px;
+    font-size:0.9em;
+    &:focus {
+        outline: none;
+    }
+`;

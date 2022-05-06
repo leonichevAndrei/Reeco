@@ -14,7 +14,7 @@ export const InfoInnerBlock = styled.div`
     justify-content: space-between;
     border: 1px solid #cccccc;
     border-radius: 10px;
-    padding: 20px 0;
+    padding: 20px 20px;
 `;
 
 type InfoPartProps = {

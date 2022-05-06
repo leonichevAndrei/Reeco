@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Printer } from "react-bootstrap-icons";
+import { Printer, CheckLg, X } from "react-bootstrap-icons";
 
 export const BodyBlock = styled.div`
     padding: 0 10vw;
@@ -13,14 +13,14 @@ export const BodyInnerBlock = styled.div`
     flex-direction: column;
     border: 1px solid #cccccc;
     border-radius: 10px;
-    padding: 20px;
+    padding: 40px;
 `;
 
 export const BodyTop = styled.div`
     display: flex;
     flex-direction: row;
     height: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `;
 
 export const SearchBlock = styled.div`
@@ -28,17 +28,6 @@ export const SearchBlock = styled.div`
     height: inherit;
 `;
 
-export const SearchInput = styled.input`
-    border: 1px solid #ebebeb;
-    width: 100%;
-    border-radius: 20px;
-    height: 35px;
-    padding: 0 10px;
-    font-size:0.9em;
-    &:focus {
-        outline: none;
-    }
-`;
 
 export const AdditionalBlock = styled.div`
     width: 60%;
@@ -104,7 +93,7 @@ type OCInsideProps = {
 }
 
 export const OCInside = styled(OCThInside)`
-    font-size: 1em;
+    padding: 7px 30px 7px 0;
     padding: ${(props: OCInsideProps) => props.side === "left" ? "0 15px" : "none"};
     padding-right: ${(props: OCInsideProps) => props.side === "right" ? "15px" : "none"};
     border-radius: ${(props: OCInsideProps) => props.corner === "left" ? "0 0 0 20px" : props.corner === "right" ? "0 0 20px 0" : "0"};
@@ -120,6 +109,55 @@ export const OrderTableItem = styled.tr`
 export const OrderColumn = styled.td`
 `;
 
-export const OrdImage = styled.div`
+export const OrdImage = styled.img`
+    max-width: 40px;
+    max-height: 40px;
+    margin: 0 0px;
+`;
+
+export const StatusBlock = styled.div`
+    width: 100%;
+    height: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const Status = styled.div`
+`;
+
+type StatusMessProps = {
+    type: string;
+}
+
+export const StatusMess = styled.div`
+    color: white;
+    border-radius: 20px;
+    padding: 3px 10px;
+    background-color: ${(props: StatusMessProps) => {
+        switch(props.type) {
+            case "missing-urgent": return "#d51b1b";
+            default: return "green";
+        }
+    }};
+`;
+
+export const StatusOK = styled.div`
+`;
+
+export const StatusOKIcon = styled(CheckLg)`
+    color: black;
+`;
+
+export const StatusX = styled.div`
+`;
+
+export const StatusXIcon = styled(X)`
+    color: black;
+`;
+
+export const StatusEdit = styled.div`
+`;
+
+export const StatusEditLink = styled.div`
 `;

@@ -1,5 +1,5 @@
-import { WhiteButton } from "../styled/common";
-import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, SearchInput, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside } from "../styled/order-body";
+import { DefaultInput, WhiteButton } from "../styled/common";
+import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside, Status, StatusEdit, StatusEditLink, StatusMess, StatusOK, StatusOKIcon, StatusX, StatusXIcon, StatusBlock } from "../styled/order-body";
 
 export default function OrderBody() {
 
@@ -8,7 +8,7 @@ export default function OrderBody() {
             <BodyInnerBlock>
                 <BodyTop>
                     <SearchBlock>
-                        <SearchInput placeholder="Search..." />
+                        <DefaultInput placeholder="Search..." />
                     </SearchBlock>
                     <AdditionalBlock>
                         <AddItem>
@@ -30,20 +30,37 @@ export default function OrderBody() {
                             <OrderColumnTh><OCThInside corner="">Total</OCThInside></OrderColumnTh>
                             <OrderColumnTh><OCThInside corner="right">Status</OCThInside></OrderColumnTh>
                         </OrderTableTh>
-                        {[1,2,3,4,5,6].map((elm, i) => {
+                        {[1, 2, 3, 4, 5, 6].map((elm, i) => {
                             return (
                                 <OrderTableItem>
                                     <OrderColumn>
                                         <OCInside side="left" corner={i === 5 ? "left" : ""}>
-                                            <OrdImage />IMG
+                                            <OrdImage src="/assets/images/avocado.jpg" />
                                         </OCInside>
                                     </OrderColumn>
-                                    <OrderColumn><OCInside side="" corner="">Text sample must be here, because we have a text here</OCInside></OrderColumn>
-                                    <OrderColumn><OCInside side="" corner="">Text sample must be here...</OCInside></OrderColumn>
-                                    <OrderColumn><OCInside side="" corner="">Text sample must be here, because we have a text here</OCInside></OrderColumn>
-                                    <OrderColumn><OCInside side="" corner="">Text sample must be here...</OCInside></OrderColumn>
-                                    <OrderColumn><OCInside side="" corner="">Text sample must be here, because we have a text here</OCInside></OrderColumn>
-                                    <OrderColumn><OCInside side="right" corner={i === 5 ? "right" : ""}>Text sample must be here, because we have a text here</OCInside></OrderColumn>
+                                    <OrderColumn><OCInside side="" corner="">Chicken Breast Fillets, Boneless Marinated 6 Ounce Raw, Invivid</OCInside></OrderColumn>
+                                    <OrderColumn><OCInside side="" corner="">Hormel Black Labelmany</OCInside></OrderColumn>
+                                    <OrderColumn><OCInside side="" corner="">$60.67 / 6 * 1LB</OCInside></OrderColumn>
+                                    <OrderColumn><OCInside side="" corner="">15 x 6 * 1LB</OCInside></OrderColumn>
+                                    <OrderColumn><OCInside side="" corner="">$9000.88</OCInside></OrderColumn>
+                                    <OrderColumn>
+                                        <OCInside style={{ minWidth: "250px" }} side="right" corner={i === 5 ? "right" : ""}>
+                                            <StatusBlock>
+                                                <Status>
+                                                    <StatusMess type="missing-urgent">Missing - Urgent</StatusMess>
+                                                </Status>
+                                                <StatusOK>
+                                                    <StatusOKIcon size={24} />
+                                                </StatusOK>
+                                                <StatusX>
+                                                    <StatusXIcon size={30} />
+                                                </StatusX>
+                                                <StatusEdit>
+                                                    <StatusEditLink>Edit</StatusEditLink>
+                                                </StatusEdit>           
+                                            </StatusBlock>
+                                        </OCInside>
+                                    </OrderColumn>
                                 </OrderTableItem>
                             );
                         })}
