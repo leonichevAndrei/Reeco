@@ -1,7 +1,14 @@
 import { DefaultInput, WhiteButton } from "../styled/common";
 import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside, Status, StatusEdit, StatusEditLink, StatusMess, StatusOK, StatusOKIcon, StatusX, StatusXIcon, StatusBlock } from "../styled/order-body";
 
-export default function OrderBody() {
+type OrderBodyProps = {
+    editPopupHandler: React.Dispatch<React.SetStateAction<boolean>>,
+    dialPopupHandler: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function OrderBody(props: OrderBodyProps) {
+
+    const { editPopupHandler, dialPopupHandler } = props;
 
     return (
         <BodyBlock>
@@ -52,12 +59,12 @@ export default function OrderBody() {
                                                 <StatusOK>
                                                     <StatusOKIcon size={24} />
                                                 </StatusOK>
-                                                <StatusX>
+                                                <StatusX onClick={() => dialPopupHandler(true)}>
                                                     <StatusXIcon size={30} />
                                                 </StatusX>
                                                 <StatusEdit>
-                                                    <StatusEditLink>Edit</StatusEditLink>
-                                                </StatusEdit>           
+                                                    <StatusEditLink onClick={() => editPopupHandler(true)}>Edit</StatusEditLink>
+                                                </StatusEdit>
                                             </StatusBlock>
                                         </OCInside>
                                     </OrderColumn>

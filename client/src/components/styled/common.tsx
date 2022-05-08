@@ -62,3 +62,13 @@ export const DefaultInput = styled.input`
         outline: none;
     }
 `;
+
+export const SimplestButton = styled.button`
+    border: none;
+    background: none;
+    height: 35px;
+    font-weight: bold;
+    &:hover {
+        color: green;
+    }
+`;

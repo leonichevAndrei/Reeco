@@ -142,22 +142,31 @@ export const StatusMess = styled.div`
     }};
 `;
 
-export const StatusOK = styled.div`
+export const StatusOK = styled.a`
+    cursor: pointer;
 `;
 
 export const StatusOKIcon = styled(CheckLg)`
     color: black;
+    &:hover {
+        color: green;
+    }
 `;
 
-export const StatusX = styled.div`
+export const StatusX = styled.a`
+    cursor: pointer;
 `;
 
 export const StatusXIcon = styled(X)`
     color: black;
+    &:hover {
+        color: green;
+    }
 `;
 
 export const StatusEdit = styled.div`
 `;
 
 export const StatusEditLink = styled.div`
+    cursor: pointer;
 `;

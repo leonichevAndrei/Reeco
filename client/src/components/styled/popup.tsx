@@ -211,3 +211,34 @@ export const PopReasSelect = styled.button`
         background-color: #ebebeb;
     }
 `;
+
+export const DialogWindow = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+`;
+
+export const DialogTop = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+export const DialTitle = styled.div`
+    font-weight: bold;
+    font-size: 1.2em;
+`;
+
+export const DialClose = styled.a`
+    cursor: pointer;
+`;
+
+export const DialogMiddle = styled.div`
+    padding: 20px 0;
+`;
+
+export const DialogBottom = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+`;
