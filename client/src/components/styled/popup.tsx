@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { X } from "react-bootstrap-icons";
-import { DefaultInput } from "./common";
+import { X, Search } from "react-bootstrap-icons";
+import { DefInput } from "./common";
 
 type PopupWrapProps = { show: boolean };
 
@@ -75,7 +75,17 @@ export const PopupBott = styled.div`
 export const PopTop = styled.div`
     height: 30px;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     justify-content: right;
+`;
+
+export const PopTopTitle = styled.div`
+    flex-grow: 1;
+    padding: 20px 0 0 25px;
+    font-weight: bold;
+    font-size: 1.2em;
 `;
 
 export const PopClose = styled.a`
@@ -89,6 +99,19 @@ export const PopCloseIcon = styled(X)`
     color: black;
 `;
 
+export const PopLine = styled.div`
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+`;
+
+export const PopLineIn = styled.div`
+    width: calc(100% - 50px);
+    height: 1px;
+    background-color: #7d7d7d;
+`;
+
 export const PopMiddle = styled.div`
     display: flex;
     flex-direction: column;
@@ -96,11 +119,16 @@ export const PopMiddle = styled.div`
     padding: 10px 40px;
 `;
 
+export const PopMiddleAdd = styled(PopMiddle)`
+    padding: 10px 25px;
+    overflow: scroll;
+`;
+
 export const PopBottom = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: right;
-    padding: 10px 40px 35px 0;
+    padding: 10px 30px 25px 0;
 `;
 
 export const PopTitle = styled.div`
@@ -151,8 +179,12 @@ export const PopLineInput = styled.div`
     padding-right: 10px;
 `;
 
-export const PopInput = styled(DefaultInput)`
-    width: 100px;
+type PopInputProps = {
+    size: number
+}
+
+export const PopInput = styled(DefInput)`
+    width: ${(props: PopInputProps) => `${props.size}px`};
     border-radius: 15px;
     background-color: #f8f8f8;
     border-color: #dfdfdf;
@@ -242,3 +274,57 @@ export const DialogBottom = styled.div`
     flex-direction: row;
     justify-content: flex-end;
 `;
+
+export const PopSearchTitle = styled.div`
+    padding: 10px 0 15px;
+`;
+
+export const PopSearchBlock = styled.div`
+
+`;
+
+const PopSearchDef = styled.div`
+    height: 360px;
+    display: flex;
+`;
+
+export const PopSearchEmpty = styled(PopSearchDef)`
+    justify-content: center;
+    align-items: center;
+`;
+
+export const PopSearchEmptyIcon = styled(Search)`
+    color: #b2b2b2;
+`;
+
+export const PopSearchResults = styled(PopSearchDef)`
+    padding: 20px 0 0 0;
+`;
+
+// export const xxx = styled.div`
+
+// `;
+
+// export const xxx = styled.div`
+
+// `;
+
+// export const xxx = styled.div`
+
+// `;
+
+// export const xxx = styled.div`
+
+// `;
+
+// export const xxx = styled.div`
+
+// `;
+
+// export const xxx = styled.div`
+
+// `;
+
+// export const xxx = styled.div`
+
+// `;

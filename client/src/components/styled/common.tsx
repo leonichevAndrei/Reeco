@@ -17,8 +17,12 @@ export const Page = styled.div`
     z-index: 5;
 `;
 
+export const ListTitle = styled.div`
+font-size: 1.1em;
+    font-weight: bold;
+`;
+
 export const ListItem = styled(Link)`
-    font-size: 1.2em;
 `;
 
 const DefButton = styled.button`
@@ -46,14 +50,36 @@ export const GreenButton = styled(DefButton)`
     color: white;
 `;
 
+type GreyButtonProps = {
+    active: boolean
+}
+
+export const GreyButton = styled(DefButton)`
+    border-color: ${(props: GreyButtonProps) => props.active ? "#336242" : "#b2b2b2" };
+    background-color: ${(props: GreyButtonProps) => props.active ? "#336242" : "#b2b2b2" };;
+    color: white;
+`;
+
 export const ButtonDivider = styled.div`
     height: 35px;
     width: 15px;
 `;
 
-export const DefaultInput = styled.input`
-    border: 1px solid #ebebeb;
+type EmptySpaceProps = {
+    size: number
+}
+
+export const EmptySpace = styled.div`
     width: 100%;
+    height: ${(props: EmptySpaceProps) => `${props.size}px`};
+`;
+
+type DefaultInputProps = {
+    size: number
+}
+
+export const DefInput = styled.input`
+    border: 1px solid #ebebeb;
     border-radius: 20px;
     height: 35px;
     padding: 0 10px;
@@ -61,6 +87,10 @@ export const DefaultInput = styled.input`
     &:focus {
         outline: none;
     }
+`;
+
+export const SearchInput = styled(DefInput)`
+    width: ${(props: DefaultInputProps) => `${props.size}%`};
 `;
 
 export const SimplestButton = styled.button`

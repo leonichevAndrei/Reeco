@@ -13,7 +13,7 @@ function App() {
     <Body>
       <Navbar />
       <Routes>
-        <Route path="*" element={<Navigate to="/order/1" />} />
+        <Route path="*" element={<Navigate to="/orders" />} />
         <Route path="/store" element={<Store />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/order/:id" element={<Order />} />

@@ -11,6 +11,7 @@ export const BodyInnerBlock = styled.div`
     width: 100%;  
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     border: 1px solid #cccccc;
     border-radius: 10px;
     padding: 40px;
@@ -57,6 +58,7 @@ export const BodyMain = styled.div`
 `;
 
 export const BodyTable = styled.table`
+    width: 100%;
     height: 1px;
 `;
 

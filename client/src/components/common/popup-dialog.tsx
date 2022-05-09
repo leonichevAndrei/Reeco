@@ -1,9 +1,10 @@
-import { ButtonDivider, SimplestButton } from "../styled/common";
-import { PopupWrap, PopupBack, PopupBackDark, PopupBlock, PopupTop, PopupMid, PopupMidLt, Popup, PopupMidRt, PopupBott, PopCloseIcon, DialClose, DialogBottom, DialogMiddle, DialogTop, DialogWindow, DialTitle } from "../styled/popup";
+import { SimplestButton, ButtonDivider } from "../styled/common";
+import { DialogWindow, DialogTop, DialTitle, DialClose, PopCloseIcon, DialogMiddle, DialogBottom } from "../styled/popup";
+import PopupCommon from "./popup-common";
 
-type PopupDialogProps = { 
-    show: boolean, 
-    closeHandler: React.Dispatch<React.SetStateAction<boolean>> 
+type PopupDialogProps = {
+    show: boolean,
+    closeHandler: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function PopupDialog(props: PopupDialogProps) {
@@ -11,37 +12,25 @@ export default function PopupDialog(props: PopupDialogProps) {
     const { show, closeHandler } = props;
 
     return (
-        <PopupWrap show={show}>
-            <PopupBack />
-            <PopupBackDark />
-            <PopupBlock>
-                <PopupTop onClick={() => closeHandler(false)} />
-                <PopupMid>
-                    <PopupMidLt onClick={() => closeHandler(false)} />
-                    <Popup size={30}>
+        <PopupCommon size={30} show={show} closeHandler={closeHandler}>
 
-                        <DialogWindow>
-                            <DialogTop>
-                                <DialTitle>Missing product</DialTitle>
-                                <DialClose>
-                                    <PopCloseIcon onClick={() => closeHandler(false)} size={26} />
-                                </DialClose>
-                            </DialogTop>
-                            <DialogMiddle>
-                                Is "Chicken Breasts Fillets, Boneless..." urgent?
-                            </DialogMiddle>
-                            <DialogBottom>
-                                <SimplestButton onClick={() => { alert("no") }}>No</SimplestButton>
-                                <ButtonDivider />
-                                <SimplestButton onClick={() => { alert("yes") }}>Yes</SimplestButton>
-                            </DialogBottom>
-                        </DialogWindow>
+            <DialogWindow>
+                <DialogTop>
+                    <DialTitle>Missing product</DialTitle>
+                    <DialClose>
+                        <PopCloseIcon onClick={() => closeHandler(false)} size={26} />
+                    </DialClose>
+                </DialogTop>
+                <DialogMiddle>
+                    Is "Chicken Breasts Fillets, Boneless..." urgent?
+                </DialogMiddle>
+                <DialogBottom>
+                    <SimplestButton onClick={() => { alert("no") }}>No</SimplestButton>
+                    <ButtonDivider />
+                    <SimplestButton onClick={() => { alert("yes") }}>Yes</SimplestButton>
+                </DialogBottom>
+            </DialogWindow>
 
-                    </Popup>
-                    <PopupMidRt onClick={() => closeHandler(false)} />
-                </PopupMid>
-                <PopupBott onClick={() => closeHandler(false)} />
-            </PopupBlock>
-        </PopupWrap>
+        </PopupCommon>
     );
 }

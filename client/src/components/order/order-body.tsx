@@ -1,25 +1,27 @@
-import { DefaultInput, WhiteButton } from "../styled/common";
+import { SearchInput, WhiteButton } from "../styled/common";
 import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside, Status, StatusEdit, StatusEditLink, StatusMess, StatusOK, StatusOKIcon, StatusX, StatusXIcon, StatusBlock } from "../styled/order-body";
 
+type SetType = React.Dispatch<React.SetStateAction<boolean>>;
 type OrderBodyProps = {
-    editPopupHandler: React.Dispatch<React.SetStateAction<boolean>>,
-    dialPopupHandler: React.Dispatch<React.SetStateAction<boolean>>
+    addPopupHandler: SetType,
+    editPopupHandler: SetType,
+    dialPopupHandler: SetType
 }
 
 export default function OrderBody(props: OrderBodyProps) {
 
-    const { editPopupHandler, dialPopupHandler } = props;
+    const { addPopupHandler, editPopupHandler, dialPopupHandler } = props;
 
     return (
         <BodyBlock>
             <BodyInnerBlock>
                 <BodyTop>
                     <SearchBlock>
-                        <DefaultInput placeholder="Search..." />
+                        <SearchInput size={100} placeholder="Search..." />
                     </SearchBlock>
                     <AdditionalBlock>
                         <AddItem>
-                            <WhiteButton>Add item</WhiteButton>
+                            <WhiteButton onClick={() => addPopupHandler(true)}>Add item</WhiteButton>
                         </AddItem>
                         <PrintOrder>
                             <PrintOrderIcon size={24} onClick={() => alert("Printing...")} />

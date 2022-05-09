@@ -5,7 +5,7 @@ export default function SubNavComponent() {
     return (
         <SubNav style={{boxShadow: "0 -10px 20px"}}>
             <SubNavTop>
-                Orders &gt; <SNLink to="/order/1">Order 32457ABC</SNLink>
+                <SNLink to="/orders">Orders</SNLink> &gt; <SNLink to="/order/1">Order 32457ABC</SNLink>
             </SubNavTop>
             <SubNavBottom>
                 <OrderNumber>Order 32457ABC</OrderNumber>
