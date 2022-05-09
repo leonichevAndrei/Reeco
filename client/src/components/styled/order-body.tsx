@@ -20,6 +20,7 @@ export const BodyInnerBlock = styled.div`
 export const BodyTop = styled.div`
     display: flex;
     flex-direction: row;
+    width: 100%;
     height: 30px;
     margin-bottom: 30px;
 `;
