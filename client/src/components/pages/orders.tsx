@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { BodyBlock, BodyInnerBlock } from "../styled/order-body";
 import { SubNav, SubNavTop, SNLink, SubNavBottom, OrderNumber } from "../styled/sub-nav";
-import templateOrder from "../../settings/templateOrder";
+import { templateOrder, templateOrderClean } from "../../settings/templateOrders";
 import { useDispatch } from "react-redux";
 import { addOrder, removeOrder } from "../../redux/features/orders/ordersSlice";
 import { ListTitle, EmptySpace, ListItem, ListItemIn, SimplestButtonMini, WhiteButton } from "../styled/common";
@@ -29,7 +29,7 @@ export default function Orders() {
                     <EmptySpace size={5} />
                     {ordersIDs.length > 0 && ordersIDs.map((elm: any, i: any) => {
                         return (
-                            <ListItem>
+                            <ListItem key={i}>
                                 <ListItemIn to={`/order/${elm}`}>Open order #{elm}</ListItemIn>
                                 <SimplestButtonMini onClick={() => dispatch(removeOrder(elm))}>Delete</SimplestButtonMini>
                             </ListItem>
@@ -37,6 +37,8 @@ export default function Orders() {
                     })}
                     <EmptySpace size={20} />
                     <WhiteButton onClick={() => dispatch(addOrder(templateOrder))}>Add dummy order</WhiteButton>
+                    <EmptySpace size={10} />
+                    <WhiteButton onClick={() => dispatch(addOrder(templateOrderClean))}>Add clean order</WhiteButton>
                 </BodyInnerBlock>
             </BodyBlock>
         </Fragment>

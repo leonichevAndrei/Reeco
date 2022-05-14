@@ -7,7 +7,6 @@ export default function Navbar() {
 
     const location = useLocation().pathname;
     const [page, setPage] = useState(location);
-    console.log(location);
 
     return (
         <Nav>

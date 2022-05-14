@@ -114,3 +114,13 @@ export const SimplestButtonMini = styled(SimplestButton)`
     font-size: 0.8em;
     text-decoration: underline;
 `;
+
+export const MiniIcons = styled.div`
+    padding-top: 5px;
+    width: 80px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 5px;
+`

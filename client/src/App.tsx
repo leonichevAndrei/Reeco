@@ -9,11 +9,13 @@ import { Body } from './components/styled/common';
 import { useEffect } from 'react';
 import { store } from './redux/store';
 import { fetchOrdersIDs } from './redux/features/orders/ordersSlice';
+import { fetchProducts } from './redux/features/products/productsSlice';
 
 function App() {
 
   useEffect(() => {
     store.dispatch(fetchOrdersIDs());
+    store.dispatch(fetchProducts());
   }, [])
   
   return (
@@ -23,7 +25,7 @@ function App() {
         <Route path="*" element={<Navigate to="/orders" />} />
         <Route path="/store" element={<Store />} />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/order/:id" element={<Order />} />
+        <Route path="/order/:orderId" element={<Order />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/basket" element={<Basket />} />
       </Routes>

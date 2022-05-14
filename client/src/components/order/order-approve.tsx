@@ -6,7 +6,7 @@ import { Page } from "../styled/common";
 import OrderBody from "./order-body";
 import OrderInfo from "./order-info";
 
-export default function OrderApprovement() {
+export default function OrderApprovement(props: any) {
 
     const [showPopupAdd, setShowPopupAdd] = useState(false);
     const [showPopupEdit, setShowPopupEdit] = useState(false);

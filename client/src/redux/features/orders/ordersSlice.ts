@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const initialState: any = {
+    orderIDs: []
+}
 const headers = { "Content-type": "application/json" };
 
 export const fetchOrdersIDs = createAsyncThunk(
@@ -33,10 +36,6 @@ export const removeOrder = createAsyncThunk(
         })
     }
 );
-
-const initialState: any = {
-    orderIDs: []
-}
 
 export const ordersSlice = createSlice({
     name: "Orders",

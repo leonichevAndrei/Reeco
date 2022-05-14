@@ -139,10 +139,15 @@ export const StatusMess = styled.div`
     padding: 3px 10px;
     background-color: ${(props: StatusMessProps) => {
         switch(props.type) {
-            case "missing-urgent": return "#d51b1b";
-            default: return "green";
+            case "none": return "white";
+            case "approved": return "#1bd546";
+            case "missing": return "#f08716";
+            case "missing-urgent": return "#e31919";
+            default: return "grey";
         }
     }};
+    text-align: center;
+    width: 140px;
 `;
 
 export const StatusOK = styled.a`
@@ -172,4 +177,7 @@ export const StatusEdit = styled.div`
 
 export const StatusEditLink = styled.div`
     cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
 `;

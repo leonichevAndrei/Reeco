@@ -12,7 +12,7 @@ export default function Dropdown(props: { text: string, list: [string, string, s
             <DdTitle onClick={() => setToggle(!toggle)}>{text} {toggle ? <MyChevronUp /> : <MyChevronDown />}</DdTitle>
             <DdBody visible={toggle ? true : false}>
                 {list.map((element, i) => {
-                    return <DdElement onClick={() => setToggle(!toggle)} href={void(0)}>{element}</DdElement>
+                    return <DdElement key={i} onClick={() => setToggle(!toggle)} href={void(0)}>{element}</DdElement>
                 })}
             </DdBody>
         </DdWrap>

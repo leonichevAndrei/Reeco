@@ -1,12 +1,21 @@
 import SubNavComponent from "../common/sub-nav-comp";
 import OrderApprovement from "../order/order-approve";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { store } from "../../redux/store";
+import { fetchCurrentOrder } from "../../redux/features/orders/orderSlice";
 
 export default function Order() {
 
+    let { orderId } = useParams();
+
+    useEffect(() => {
+        store.dispatch(fetchCurrentOrder(orderId));
+    }, [orderId]);
+
     return (
         <Fragment>
-            <SubNavComponent />
+            <SubNavComponent orderId={orderId} />
             <OrderApprovement />
         </Fragment>
     )
