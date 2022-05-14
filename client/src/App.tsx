@@ -6,9 +6,16 @@ import Basket from './components/pages/basket';
 import Store from './components/pages/store';
 import Order from './components/pages/order';
 import { Body } from './components/styled/common';
+import { useEffect } from 'react';
+import { store } from './redux/store';
+import { fetchOrdersIDs } from './redux/features/orders/ordersSlice';
 
 function App() {
 
+  useEffect(() => {
+    store.dispatch(fetchOrdersIDs());
+  }, [])
+  
   return (
     <Body>
       <Navbar />

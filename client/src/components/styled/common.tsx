@@ -22,7 +22,14 @@ font-size: 1.1em;
     font-weight: bold;
 `;
 
-export const ListItem = styled(Link)`
+export const ListItem = styled.div`
+`;
+
+export const ListItemIn = styled(Link)`
+    margin-right: 10px;
+`;
+
+export const ListItemDel = styled.a`
 `;
 
 const DefButton = styled.button`
@@ -101,4 +108,9 @@ export const SimplestButton = styled.button`
     &:hover {
         color: green;
     }
+`;
+
+export const SimplestButtonMini = styled(SimplestButton)`
+    font-size: 0.8em;
+    text-decoration: underline;
 `;

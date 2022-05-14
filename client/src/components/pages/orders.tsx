@@ -1,18 +1,17 @@
-import { Fragment, useState } from "react";
-import { EmptySpace, ListItem, ListTitle, WhiteButton } from "../styled/common";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { BodyBlock, BodyInnerBlock } from "../styled/order-body";
 import { SubNav, SubNavTop, SNLink, SubNavBottom, OrderNumber } from "../styled/sub-nav";
-
-const DUMMY_ORDER = 99;
-const INIT_ORDERS = [1,2,3,4,5,6,7,8];
+import templateOrder from "../../settings/templateOrder";
+import { useDispatch } from "react-redux";
+import { addOrder, removeOrder } from "../../redux/features/orders/ordersSlice";
+import { ListTitle, EmptySpace, ListItem, ListItemIn, SimplestButtonMini, WhiteButton } from "../styled/common";
 
 export default function Orders() {
 
-    const [orders, setOrders] = useState(INIT_ORDERS);
-
-    function addDummyOrder() {
-        setOrders([...orders, DUMMY_ORDER]);
-    }
+    const ordersIDs = useSelector((state: RootState) => state.orders.orderIDs);
+    const dispatch: any = useDispatch();
 
     return (
         <Fragment>
@@ -28,11 +27,16 @@ export default function Orders() {
                 <BodyInnerBlock>
                     <ListTitle>Non approved orders List:</ListTitle>
                     <EmptySpace size={5} />
-                    {orders.map((elm, i) => {
-                        return <ListItem to={`/order/${elm}`}>Open order #{elm}</ListItem>
+                    {ordersIDs.length > 0 && ordersIDs.map((elm: any, i: any) => {
+                        return (
+                            <ListItem>
+                                <ListItemIn to={`/order/${elm}`}>Open order #{elm}</ListItemIn>
+                                <SimplestButtonMini onClick={() => dispatch(removeOrder(elm))}>Delete</SimplestButtonMini>
+                            </ListItem>
+                        )
                     })}
                     <EmptySpace size={20} />
-                    <WhiteButton onClick={() => addDummyOrder()}>Add dummy order</WhiteButton>
+                    <WhiteButton onClick={() => dispatch(addOrder(templateOrder))}>Add dummy order</WhiteButton>
                 </BodyInnerBlock>
             </BodyBlock>
         </Fragment>
