@@ -29,12 +29,28 @@ export const updateCurrentOrder = createAsyncThunk(
 
 function generateOrder(data: any) {
     switch (data.type) {
-        case "order/updateItem/setApproved": {
+        case "order/updateItem/setApproved":
+        case "order/updateItem/setMissing":
+        case "order/updateItem/setMissingUrgent":
+        case "order/updateItem/setNone": {
             return getNewOrder(
-                data, 
+                data,
                 (price: any) => price,
                 (quantity: any) => quantity,
-                (status: any) => status !== "approved" ? "approved" : "none",
+                (status: any) => {
+                    switch (data.type) {
+                        case "order/updateItem/setApproved": {
+                            return status !== "approved" ? "approved" : "none"
+                        };
+                        case "order/updateItem/setMissing": {
+                            return status !== "missing" ? "missing" : "none"
+                        };
+                        case "order/updateItem/setMissingUrgent": {
+                            return status !== "missing-urgent" ? "missing-urgent" : "none"
+                        };
+                        default: return "none";
+                    }
+                },
                 (updated: any) => updated,
                 (updReason: any) => updReason
             );

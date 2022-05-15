@@ -27,17 +27,23 @@ export default function PopupDialog(props: PopupDialogProps) {
                     Is "Chicken Breasts Fillets, Boneless..." urgent?
                 </DialogMiddle>
                 <DialogBottom>
-                    <SimplestButton onClick={() => store.dispatch(updateCurrentOrder({
-                        type: "order/updateItem/setMissing",
-                        order: store.getState().order.currentOrder,
-                        itemID: store.getState().order.currentItemID
-                    }))}>No</SimplestButton>
+                    <SimplestButton onClick={() => {
+                        store.dispatch(updateCurrentOrder({
+                            type: "order/updateItem/setMissing",
+                            order: store.getState().order.currentOrder,
+                            itemID: store.getState().order.currentItemID
+                        }));
+                        setTimeout (() => closeHandler(false), 10);
+                    }}>No</SimplestButton>
                     <ButtonDivider />
-                    <SimplestButton onClick={() => store.dispatch(updateCurrentOrder({
-                        type: "order/updateItem/setMissingUrgent",
-                        order: store.getState().order.currentOrder,
-                        itemID: store.getState().order.currentItemID
-                    }))}>Yes</SimplestButton>
+                    <SimplestButton onClick={() => {
+                        store.dispatch(updateCurrentOrder({
+                            type: "order/updateItem/setMissingUrgent",
+                            order: store.getState().order.currentOrder,
+                            itemID: store.getState().order.currentItemID
+                        }));
+                        setTimeout (() => closeHandler(false), 10);
+                    }}>Yes</SimplestButton>
                 </DialogBottom>
             </DialogWindow>
 

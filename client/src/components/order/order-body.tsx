@@ -104,7 +104,15 @@ export default function OrderBody(props: OrderBodyProps) {
                                                     </StatusOK>
                                                     <StatusX onClick={() => {
                                                         dispatch(setItemID(elm.id));
-                                                        dialPopupHandler(true);
+                                                        if (elm.status !== "missing" && elm.status !== "missing-urgent") {
+                                                            dialPopupHandler(true);
+                                                        } else {
+                                                            store.dispatch(updateCurrentOrder({
+                                                                type: "order/updateItem/setNone",
+                                                                order: order,
+                                                                itemID: elm.id
+                                                            }));
+                                                        }
                                                     }}>
                                                         <StatusXIcon color={elm.status === "missing" || elm.status === "missing-urgent" ? "#cc0000" : "#aaaaaa"} size={30} />
                                                     </StatusX>
