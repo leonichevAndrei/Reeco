@@ -30,16 +30,32 @@ export const updateCurrentOrder = createAsyncThunk(
 function generateOrder(data: any) {
     switch (data.type) {
         case "order/updateItem/setApproved": {
-            const orderItems = getIDKeysArray(data.order.items);
-            orderItems[data.itemID] = {
-                ...orderItems[data.itemID],
-                status: orderItems[data.itemID].status !== "approved" ? "approved" : "none"
-            };
-            const newOrder = { ...data.order, items: getNormalArray(orderItems) };
-            return newOrder;
+            return getNewOrder(
+                data, 
+                (price: any) => price,
+                (quantity: any) => quantity,
+                (status: any) => status !== "approved" ? "approved" : "none",
+                (updated: any) => updated,
+                (updReason: any) => updReason
+            );
         };
         default: return data.order;
     }
+}
+
+function getNewOrder(data: any, priceCallback: any, quantityCallback: any, statusCallback: any, updatedCallback: any, updReasonCallback: any) {
+    const orderItems = getIDKeysArray(data.order.items);
+    let item = orderItems[data.itemID];
+    orderItems[data.itemID] = {
+        ...item,
+        price: priceCallback(item.price),
+        quantity: quantityCallback(item.quantity),
+        status: statusCallback(item.status),
+        updated: updatedCallback(item.updated),
+        updReason: updReasonCallback(item.updReason)
+    };
+    const newOrder = { ...data.order, items: getNormalArray(orderItems) };
+    return newOrder;
 }
 
 export const orderSlice = createSlice({

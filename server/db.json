@@ -129,7 +129,7 @@
           "productID": 2,
           "price": 22,
           "quantity": 20,
-          "status": "approved",
+          "status": "none",
           "updated": [],
           "updReason": ""
         },
