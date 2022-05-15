@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { setItemID, updateCurrentOrder } from "../../redux/features/orders/orderSlice";
+import { RootState, store } from "../../redux/store";
+import { getIDKeysArray } from "../../utill/getIDKeysArray";
 import { SearchInput, WhiteButton } from "../styled/common";
 import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside, Status, StatusEdit, StatusEditLink, StatusMess, StatusOK, StatusOKIcon, StatusX, StatusXIcon, StatusBlock } from "../styled/order-body";
 
@@ -18,18 +21,11 @@ export default function OrderBody(props: OrderBodyProps) {
     const [searchInp, setSearchInp] = useState("");
     const order = useSelector((store: RootState) => store.order.currentOrder);
     const products = useSelector((store: RootState) => store.products.productsArr);
-    const productsById = useMemo(() => getProductsById(products), [products]);
-
-    function getProductsById(products: any) {
-        const result = [];
-        for (let elm of products) {
-            result[elm.id] = elm;
-        }
-        return result;
-    }
+    const productsById = useMemo(() => getIDKeysArray(products), [products]);
+    const dispatch = useDispatch();
 
     function getProductStatus(status: string, updated: string[]) {
-        switch(status) {
+        switch (status) {
             case "approved": return getApprovedStatus(updated); break;
             case "missing": return "Missing"; break;
             case "missing-urgent": return "Missing - Urgent"; break;
@@ -99,10 +95,17 @@ export default function OrderBody(props: OrderBodyProps) {
                                                     <Status>
                                                         <StatusMess type={elm.status}>{getProductStatus(elm.status, elm.updated)}</StatusMess>
                                                     </Status>
-                                                    <StatusOK>
+                                                    <StatusOK onClick={() => store.dispatch(updateCurrentOrder({
+                                                        type: "order/updateItem/setApproved",
+                                                        order: order,
+                                                        itemID: elm.id
+                                                    }))}>
                                                         <StatusOKIcon color={elm.status === "approved" ? "#00cc00" : "#aaaaaa"} size={24} />
                                                     </StatusOK>
-                                                    <StatusX onClick={() => dialPopupHandler(true)}>
+                                                    <StatusX onClick={() => {
+                                                        dispatch(setItemID(elm.id));
+                                                        dialPopupHandler(true);
+                                                    }}>
                                                         <StatusXIcon color={elm.status === "missing" || elm.status === "missing-urgent" ? "#cc0000" : "#aaaaaa"} size={30} />
                                                     </StatusX>
                                                     <StatusEdit>

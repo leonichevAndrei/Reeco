@@ -75,6 +75,7 @@ export const templateOrder = {
     "status" : "awaiting",
     "items" : [
       {
+        "id": 1,
         "productID": 1,
         "price": 11,
         "quantity": 15,
@@ -83,6 +84,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 2,
         "productID": 2,
         "price": 22,
         "quantity": 20,
@@ -91,6 +93,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 3,
         "productID": 1,
         "price": 33,
         "quantity": 25,
@@ -99,6 +102,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 4,
         "productID": 2,
         "price": 44,
         "quantity": 30,
@@ -107,6 +111,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 5,
         "productID": 1,
         "price": 55,
         "quantity": 35,
@@ -115,6 +120,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 6,
         "productID": 2,
         "price": 66,
         "quantity": 40,
@@ -123,6 +129,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 7,
         "productID": 1,
         "price": 77,
         "quantity": 45,

@@ -1,3 +1,5 @@
+import { updateCurrentOrder } from "../../redux/features/orders/orderSlice";
+import { store } from "../../redux/store";
 import { SimplestButton, ButtonDivider } from "../styled/common";
 import { DialogWindow, DialogTop, DialTitle, DialClose, PopCloseIcon, DialogMiddle, DialogBottom } from "../styled/popup";
 import PopupCommon from "./popup-common";
@@ -25,9 +27,17 @@ export default function PopupDialog(props: PopupDialogProps) {
                     Is "Chicken Breasts Fillets, Boneless..." urgent?
                 </DialogMiddle>
                 <DialogBottom>
-                    <SimplestButton onClick={() => { alert("no") }}>No</SimplestButton>
+                    <SimplestButton onClick={() => store.dispatch(updateCurrentOrder({
+                        type: "order/updateItem/setMissing",
+                        order: store.getState().order.currentOrder,
+                        itemID: store.getState().order.currentItemID
+                    }))}>No</SimplestButton>
                     <ButtonDivider />
-                    <SimplestButton onClick={() => { alert("yes") }}>Yes</SimplestButton>
+                    <SimplestButton onClick={() => store.dispatch(updateCurrentOrder({
+                        type: "order/updateItem/setMissingUrgent",
+                        order: store.getState().order.currentOrder,
+                        itemID: store.getState().order.currentItemID
+                    }))}>Yes</SimplestButton>
                 </DialogBottom>
             </DialogWindow>
 
