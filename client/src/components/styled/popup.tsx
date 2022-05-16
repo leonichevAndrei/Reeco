@@ -195,6 +195,10 @@ export const PopLinePlus = styled.div`
     line-height: 30px;
 `;
 
+export const PopLinePlusChange = styled(PopLinePlus)`
+    color: #BFBFBF;
+`;
+
 export const PopPlus = styled.div`
     width: 40px;
     display: flex;

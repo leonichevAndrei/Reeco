@@ -17,7 +17,6 @@ export default function PopupAdd(props: PopupEditProps) {
 
     return (
         <PopupCommon size={70} show={show} closeHandler={closeHandler}>
-
             <PopTop>
                 <PopTopTitle>Add product from Sysco's catalog</PopTopTitle>
                 <PopClose>
@@ -79,10 +78,6 @@ export default function PopupAdd(props: PopupEditProps) {
             <PopBottom>
                 <GreyButton active={false}>Review</GreyButton>
             </PopBottom>
-
         </PopupCommon>
     );
-
-
 }
-

@@ -8,8 +8,8 @@ import Order from './components/pages/order';
 import { Body } from './components/styled/common';
 import { useEffect } from 'react';
 import { store } from './redux/store';
-import { fetchOrdersIDs } from './redux/features/orders/ordersSlice';
-import { fetchProducts } from './redux/features/products/productsSlice';
+import { fetchOrdersIDs } from './redux/features/orders/orders-slice';
+import { fetchProducts } from './redux/features/products/products-slice';
 
 function App() {
 

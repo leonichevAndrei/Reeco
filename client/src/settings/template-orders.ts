@@ -139,3 +139,12 @@ export const templateOrder = {
       }
     ]
   }
+  export const emptyItem = {
+    "id": -1,
+    "productID": -1,
+    "price": 0,
+    "quantity": 0,
+    "status": "",
+    "updated": [],
+    "updReason": ""
+  }

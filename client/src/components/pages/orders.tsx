@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { BodyBlock, BodyInnerBlock } from "../styled/order-body";
 import { SubNav, SubNavTop, SNLink, SubNavBottom, OrderNumber } from "../styled/sub-nav";
-import { templateOrder, templateOrderClean } from "../../settings/templateOrders";
+import { templateOrder, templateOrderClean } from "../../settings/template-orders";
 import { useDispatch } from "react-redux";
-import { addOrder, removeOrder } from "../../redux/features/orders/ordersSlice";
+import { addOrder, removeOrder } from "../../redux/features/orders/orders-slice";
 import { ListTitle, EmptySpace, ListItem, ListItemIn, SimplestButtonMini, WhiteButton } from "../styled/common";
 
 export default function Orders() {

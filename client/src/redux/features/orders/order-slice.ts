@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getIDKeysArray, getNormalArray } from "../../../utill/getIDKeysArray";
+import { getIDKeysArray, getNormalArray } from "../../../utill/get-arrays";
 
 const initialState: any = {
     currentOrder: {},

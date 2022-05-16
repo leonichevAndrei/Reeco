@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setItemID, updateCurrentOrder } from "../../redux/features/orders/orderSlice";
+import { setItemID, updateCurrentOrder } from "../../redux/features/orders/order-slice";
 import { RootState, store } from "../../redux/store";
-import { getIDKeysArray } from "../../utill/getIDKeysArray";
+import { getIDKeysArray } from "../../utill/get-arrays";
 import { SearchInput, WhiteButton } from "../styled/common";
 import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside, Status, StatusEdit, StatusEditLink, StatusMess, StatusOK, StatusOKIcon, StatusX, StatusXIcon, StatusBlock } from "../styled/order-body";
 
@@ -117,7 +117,10 @@ export default function OrderBody(props: OrderBodyProps) {
                                                         <StatusXIcon color={elm.status === "missing" || elm.status === "missing-urgent" ? "#cc0000" : "#aaaaaa"} size={30} />
                                                     </StatusX>
                                                     <StatusEdit>
-                                                        <StatusEditLink onClick={() => editPopupHandler(true)}>Edit</StatusEditLink>
+                                                        <StatusEditLink onClick={() => {
+                                                            dispatch(setItemID(elm.id));
+                                                            editPopupHandler(true);
+                                                        }}>Edit</StatusEditLink>
                                                     </StatusEdit>
                                                 </StatusBlock>
                                             </OCInside>

@@ -1,4 +1,4 @@
-import { updateCurrentOrder } from "../../redux/features/orders/orderSlice";
+import { updateCurrentOrder } from "../../redux/features/orders/order-slice";
 import { store } from "../../redux/store";
 import { SimplestButton, ButtonDivider } from "../styled/common";
 import { DialogWindow, DialogTop, DialTitle, DialClose, PopCloseIcon, DialogMiddle, DialogBottom } from "../styled/popup";
@@ -15,7 +15,6 @@ export default function PopupDialog(props: PopupDialogProps) {
 
     return (
         <PopupCommon size={30} show={show} closeHandler={closeHandler}>
-
             <DialogWindow>
                 <DialogTop>
                     <DialTitle>Missing product</DialTitle>
@@ -46,7 +45,6 @@ export default function PopupDialog(props: PopupDialogProps) {
                     }}>Yes</SimplestButton>
                 </DialogBottom>
             </DialogWindow>
-
         </PopupCommon>
     );
 }

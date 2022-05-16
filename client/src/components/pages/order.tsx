@@ -3,7 +3,7 @@ import OrderApprovement from "../order/order-approve";
 import { Fragment, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { store } from "../../redux/store";
-import { fetchCurrentOrder } from "../../redux/features/orders/orderSlice";
+import { fetchCurrentOrder } from "../../redux/features/orders/order-slice";
 
 export default function Order() {
 
