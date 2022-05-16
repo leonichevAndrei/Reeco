@@ -11,10 +11,6 @@ export const InfoInnerBlock = styled.div`
     width: 100%; 
     height: 100%;
     display: table;
-    /* flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: stretch; */
     border: 1px solid #cccccc;
     border-radius: 10px;
     padding: 20px 20px;
@@ -28,9 +24,6 @@ export const InfoPart = styled.div`
     height: 100%;
     padding: 0 20px;
     display: table-cell;
-    /* flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap; */
     border-right: ${(props: InfoPartProps) => props.needDivider ? "1px solid #cccccc" : "none"};
 `;
 
