@@ -55,7 +55,7 @@ export const PrintOrderIcon = styled(Printer)`
 `;
 
 export const BodyMain = styled.div`
-    
+    width: 100%;
 `;
 
 export const BodyTable = styled.table`

@@ -123,4 +123,11 @@ export const MiniIcons = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     gap: 5px;
-`
+`;
+
+export const NoResultsBlock = styled.div`
+    width: 30vw;
+    position: absolute;
+    left: calc(50% - 15vw);
+    text-align: center;
+`;

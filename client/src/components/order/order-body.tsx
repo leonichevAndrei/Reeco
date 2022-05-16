@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setItemID, updateCurrentOrder } from "../../redux/features/orders/order-slice";
 import { RootState, store } from "../../redux/store";
+import { emptyItem } from "../../settings/template-orders";
 import { getIDKeysArray } from "../../utill/get-arrays";
-import { SearchInput, WhiteButton } from "../styled/common";
+import { searchFilterCheck } from "../../utill/search-utills";
+import { NoResultsBlock, SearchInput, WhiteButton } from "../styled/common";
 import { BodyBlock, BodyInnerBlock, BodyTop, SearchBlock, AdditionalBlock, AddItem, PrintOrder, PrintOrderIcon, BodyMain, BodyTable, OrderTableTh, OrderColumnTh, OrderTableItem, OrderColumn, OrdImage, OCThInside, OCInside, Status, StatusEdit, StatusEditLink, StatusMess, StatusOK, StatusOKIcon, StatusX, StatusXIcon, StatusBlock } from "../styled/order-body";
 
 type SetType = React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +24,23 @@ export default function OrderBody(props: OrderBodyProps) {
     const products = useSelector((store: RootState) => store.products.productsArr);
     const productsById = useMemo(() => getIDKeysArray(products), [products]);
     const [searchInp, setSearchInp] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
     const dispatch = useDispatch();
+
+    console.log(searchResults);
+
+    useEffect(() => {
+        if (order.items !== undefined && products.length > 0 && productsById.length > 0) {
+            const searchResultsPre = order.items.filter((elm: any) => {
+                return searchInp !== ""
+                    ? searchFilterCheck(searchInp, productsById[elm.productID].name)
+                    : true;
+            });
+            const blankItem = [];
+            blankItem[0] = emptyItem;
+            setSearchResults(searchResultsPre.length !== 0 ? searchResultsPre : blankItem);
+        }
+    }, [order, productsById, searchInp])
 
     function getProductStatus(status: string, updated: string[]) {
         switch (status) {
@@ -81,53 +99,56 @@ export default function OrderBody(props: OrderBodyProps) {
                             order.items !== undefined &&
                             products.length > 0 &&
                             productsById.length > 0 &&
-                            order.items.map((elm: any, i: number) => {
+                            searchResults.length > 0 &&
+                            searchResults.map((elm: any, i: number) => {
                                 return (
                                     <OrderTableItem key={i}>
                                         <OrderColumn>
-                                            <OCInside side="left" corner={i === order.items.length - 1 ? "left" : ""}>
-                                                <OrdImage src={`/assets/images/${productsById[elm.productID].image}`} />
+                                            <OCInside side="left" corner={i === searchResults.length - 1 ? "left" : ""}>
+                                                {elm.id !== -1 ? <OrdImage src={`/assets/images/${productsById[elm.productID].image}`} /> : <>&nbsp;</>}
                                             </OCInside>
                                         </OrderColumn>
                                         <OrderColumn><OCInside side="" corner="">{productsById[elm.productID].name}</OCInside></OrderColumn>
                                         <OrderColumn><OCInside side="" corner="">{productsById[elm.productID].brand}</OCInside></OrderColumn>
-                                        <OrderColumn><OCInside side="" corner="">${elm.price}</OCInside></OrderColumn>
-                                        <OrderColumn><OCInside side="" corner="">{elm.quantity}</OCInside></OrderColumn>
-                                        <OrderColumn><OCInside side="" corner="">${elm.price * elm.quantity}</OCInside></OrderColumn>
+                                        <OrderColumn><OCInside side="" corner="">{elm.id !== -1 ? `$${elm.price}` : <>&nbsp;</>}</OCInside></OrderColumn>
+                                        <OrderColumn><OCInside side="" corner="">{elm.id !== -1 ? elm.quantity : <>&nbsp;</>}</OCInside></OrderColumn>
+                                        <OrderColumn><OCInside side="" corner="">{elm.id !== -1 ? `$${(elm.price * elm.quantity)}` : <>&nbsp;</>}</OCInside></OrderColumn>
                                         <OrderColumn>
-                                            <OCInside style={{ minWidth: "250px" }} side="right" corner={i === order.items.length - 1 ? "right" : ""}>
-                                                <StatusBlock>
-                                                    <Status>
-                                                        <StatusMess type={elm.status}>{getProductStatus(elm.status, elm.updated)}</StatusMess>
-                                                    </Status>
-                                                    <StatusOK onClick={() => store.dispatch(updateCurrentOrder({
-                                                        type: "order/updateItem/setApproved",
-                                                        order: order,
-                                                        itemID: elm.id
-                                                    }))}>
-                                                        <StatusOKIcon color={elm.status === "approved" ? "#00cc00" : "#aaaaaa"} size={24} />
-                                                    </StatusOK>
-                                                    <StatusX onClick={() => {
-                                                        dispatch(setItemID(elm.id));
-                                                        if (elm.status !== "missing" && elm.status !== "missing-urgent") {
-                                                            dialPopupHandler(true);
-                                                        } else {
-                                                            store.dispatch(updateCurrentOrder({
-                                                                type: "order/updateItem/setNone",
-                                                                order: order,
-                                                                itemID: elm.id
-                                                            }));
-                                                        }
-                                                    }}>
-                                                        <StatusXIcon color={elm.status === "missing" || elm.status === "missing-urgent" ? "#cc0000" : "#aaaaaa"} size={30} />
-                                                    </StatusX>
-                                                    <StatusEdit>
-                                                        <StatusEditLink onClick={() => {
+                                            <OCInside style={{ minWidth: "250px" }} side="right" corner={i === searchResults.length - 1 ? "right" : ""}>
+                                                {elm.id !== -1 ?
+                                                    <StatusBlock>
+                                                        <Status>
+                                                            <StatusMess type={elm.status}>{getProductStatus(elm.status, elm.updated)}</StatusMess>
+                                                        </Status>
+                                                        <StatusOK onClick={() => store.dispatch(updateCurrentOrder({
+                                                            type: "order/updateItem/setApproved",
+                                                            order: order,
+                                                            itemID: elm.id
+                                                        }))}>
+                                                            <StatusOKIcon color={elm.status === "approved" ? "#00cc00" : "#aaaaaa"} size={24} />
+                                                        </StatusOK>
+                                                        <StatusX onClick={() => {
                                                             dispatch(setItemID(elm.id));
-                                                            editPopupHandler(true);
-                                                        }}>Edit</StatusEditLink>
-                                                    </StatusEdit>
-                                                </StatusBlock>
+                                                            if (elm.status !== "missing" && elm.status !== "missing-urgent") {
+                                                                dialPopupHandler(true);
+                                                            } else {
+                                                                store.dispatch(updateCurrentOrder({
+                                                                    type: "order/updateItem/setNone",
+                                                                    order: order,
+                                                                    itemID: elm.id
+                                                                }));
+                                                            }
+                                                        }}>
+                                                            <StatusXIcon color={elm.status === "missing" || elm.status === "missing-urgent" ? "#cc0000" : "#aaaaaa"} size={30} />
+                                                        </StatusX>
+                                                        <StatusEdit>
+                                                            <StatusEditLink onClick={() => {
+                                                                dispatch(setItemID(elm.id));
+                                                                editPopupHandler(true);
+                                                            }}>Edit</StatusEditLink>
+                                                        </StatusEdit>
+                                                    </StatusBlock>
+                                                    : <NoResultsBlock>No results</NoResultsBlock>}
                                             </OCInside>
                                         </OrderColumn>
                                     </OrderTableItem>
