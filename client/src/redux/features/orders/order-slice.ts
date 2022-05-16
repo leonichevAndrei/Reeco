@@ -65,6 +65,15 @@ function generateOrder(data: any) {
                 (updReason: any) => data.payload.updReason
             );
         };
+        case "order/updateOrder/addItems" : {
+            return {
+                ...data.order,
+                items : [
+                    ...data.order.items,
+                    ...data.payload
+                ]
+            }
+        }
         default: return data.order;
     }
 }

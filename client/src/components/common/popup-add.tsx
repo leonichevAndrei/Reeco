@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { updateCurrentOrder } from "../../redux/features/orders/order-slice";
+import { RootState, store } from "../../redux/store";
 import { getIDKeysArray } from "../../utill/get-arrays";
 import { inputPriceAddPopup, inputQuantityAddPopup } from "../../utill/input-checks";
 import { searchFilterCheck } from "../../utill/search-utills";
@@ -42,20 +43,8 @@ export default function PopupAdd(props: PopupEditProps) {
 
     useEffect(() => {
         if (products.length > 0) {
-            const priceInpPre = getIDKeysArray(products.map((elm: any) => {
-                return {
-                    "id": elm.id,
-                    "value": "$22"
-                }
-            }));
-            setPriceInp(priceInpPre);
-            const quantityInpPre = getIDKeysArray(products.map((elm: any) => {
-                return {
-                    "id": elm.id,
-                    "value": ""
-                }
-            }));
-            setQuantityInp(quantityInpPre);
+            setPriceInp(getPriceInp());
+            setQuantityInp(getQuantityInp());
         }
     }, [products]);
 
@@ -69,6 +58,43 @@ export default function PopupAdd(props: PopupEditProps) {
             setSearchResults(searchResultsPre);
         }
     }, [orderID, products, searchInp]);
+
+    function getPriceInp() {
+        return getIDKeysArray(products.map((elm: any) => {
+            return {
+                "id": elm.id,
+                "value": "$22"
+            }
+        }));
+    }
+
+    function getQuantityInp() {
+        return getIDKeysArray(products.map((elm: any) => {
+            return {
+                "id": elm.id,
+                "value": ""
+            }
+        }));
+    }
+
+    function generateAdditionalItems() {
+        let maxId = products.reduce((max: number, elm: any) => elm.id > max ? elm.id : max, 0);
+        let usedIds = new Array();
+        usedIds.push(maxId);
+        return selectedProdIds.map((elm, i) => {
+            const newMaxId = usedIds[usedIds.length - 1] + 1;
+            usedIds.push(newMaxId);
+            return {
+                "id": newMaxId,
+                "productID": elm.id,
+                "price": parseInt((priceInp[elm.id].value).replace("$", "")),
+                "quantity": quantityInp[elm.id].value,
+                "status": "none",
+                "updated": [],
+                "updReason": ""
+            };
+        });
+    }
 
     return (
         <PopupCommon size={70} show={show} closeHandler={closeHandler}>
@@ -156,7 +182,20 @@ export default function PopupAdd(props: PopupEditProps) {
                         }
                     }} changed={reviewMode} active={selectedProdIds.length > 0}>{reviewMode ? "Back" : "Review"}</GreyButton>
                     {reviewMode && <><ButtonDivider />
-                        <GreenButton>Add</GreenButton></>}
+                        <GreenButton onClick={() => {
+                            store.dispatch(updateCurrentOrder({
+                                type: "order/updateOrder/addItems",
+                                order: store.getState().order.currentOrder,
+                                payload: generateAdditionalItems()
+                            }));
+                            setsearchInp("");
+                            setSearchResults([]);
+                            setPriceInp(getPriceInp());
+                            setQuantityInp(getQuantityInp());
+                            setSelectedProdIds(new Array());
+                            setReviewMode(false);
+                            setTimeout(() => closeHandler(false), 10);
+                        }}>Add</GreenButton></>}
                 </PopBottomButtons>
             </PopBottomAdd>
         </PopupCommon>

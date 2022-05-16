@@ -169,7 +169,7 @@ export default function PopupEdit(props: PopupEditProps) {
                                 order: orderState.currentOrder,
                                 itemID: orderState.currentItemID,
                                 payload: generateNewItem()
-                            }))
+                            }));
                             setTimeout(() => closeHandler(false), 10);
                         }}>Send</GreenButton>
                     </PopBottom>
