@@ -4,9 +4,9 @@ import { RootState } from "../../redux/store";
 import { getIDKeysArray } from "../../utill/get-arrays";
 import { inputPriceAddPopup, inputQuantityAddPopup } from "../../utill/input-checks";
 import { searchFilterCheck } from "../../utill/search-utills";
-import { SearchInput, GreyButton, Bold } from "../styled/common";
+import { SearchInput, GreyButton, Bold, GreenButton, ButtonDivider } from "../styled/common";
 import { BodyTable, OrderTableTh, OrderColumnTh, OCThInside, OrderTableItem, OrderColumn, OCInside, OrdImage } from "../styled/order-body";
-import { PopTop, PopClose, PopCloseIcon, PopTopTitle, PopLine, PopLineIn, PopMiddleAdd, PopSearchBlock, PopSearchTitle, PopSearchEmpty, PopSearchEmptyIcon, PopSearchResults, PopInput, PopBottomCount, PopBottomAdd } from "../styled/popup";
+import { PopTop, PopClose, PopCloseIcon, PopTopTitle, PopLine, PopLineIn, PopMiddleAdd, PopSearchBlock, PopSearchTitle, PopSearchEmpty, PopSearchEmptyIcon, PopSearchResults, PopInput, PopBottomCount, PopBottomAdd, PopBottomButtons } from "../styled/popup";
 import PopupCommon from "./popup-common";
 
 type PopupEditProps = {
@@ -26,6 +26,7 @@ export default function PopupAdd(props: PopupEditProps) {
     const [priceInp, setPriceInp] = useState(new Array());
     const [quantityInp, setQuantityInp] = useState(new Array());
     const [selectedProdIds, setSelectedProdIds] = useState(new Array());
+    const [reviewMode, setReviewMode] = useState(false);
 
     useEffect(() => {
         if (quantityInp.length > 2) {
@@ -83,7 +84,12 @@ export default function PopupAdd(props: PopupEditProps) {
             <PopMiddleAdd>
                 <PopSearchTitle>Search products from Sysco's catalog and add quantity</PopSearchTitle>
                 <PopSearchBlock>
-                    <SearchInput value={searchInp} onInput={(e) => setsearchInp(e.currentTarget.value)} size={50} placeholder="Search..." />
+                    <SearchInput
+                        value={!reviewMode ? searchInp : ""}
+                        onInput={(e) => !reviewMode ? setsearchInp(e.currentTarget.value) : void (0)}
+                        size={50}
+                        placeholder={!reviewMode ? "Search..." : "No search in review mode"}
+                    />
                 </PopSearchBlock>
                 {(searchResults.length === 0)
                     ?
@@ -103,34 +109,38 @@ export default function PopupAdd(props: PopupEditProps) {
                             </OrderTableTh>
                             {searchResults.length > 0 &&
                                 productsById.length > 0 &&
-                                searchResults.map((elm: any, i: number) => {
-                                    return (
-                                        <OrderTableItem>
-                                            <OrderColumn>
-                                                <OCInside side="left" corner={i === searchResults.length - 1 ? "left" : ""}>
-                                                    <OrdImage src={`/assets/images/${elm.image}`} />
-                                                </OCInside>
-                                            </OrderColumn>
-                                            <OrderColumn><OCInside side="" corner="">{elm.name}</OCInside></OrderColumn>
-                                            <OrderColumn><OCInside side="" corner="">{elm.brand}</OCInside></OrderColumn>
-                                            <OrderColumn><OCInside side="" corner="">Default</OCInside></OrderColumn>
-                                            <OrderColumn>
-                                                <OCInside side="" corner="">
-                                                    <PopInput size={75} value={priceInp[elm.id].value} onInput={(e) => {
-                                                        inputPriceAddPopup(e.currentTarget.value, priceInp, elm.id, setPriceInp);
-                                                    }} />
-                                                </OCInside>
-                                            </OrderColumn>
-                                            <OrderColumn>
-                                                <OCInside side="right" corner={i === searchResults.length - 1 ? "right" : ""}>
-                                                    <PopInput size={75} value={quantityInp[elm.id].value} onInput={(e) => {
-                                                        inputQuantityAddPopup(e.currentTarget.value, quantityInp, elm.id, setQuantityInp);
-                                                    }} />
-                                                </OCInside>
-                                            </OrderColumn>
-                                        </OrderTableItem>
-                                    );
-                                })}
+                                (!reviewMode
+                                    ? searchResults
+                                    : selectedProdIds.map((elm) => {
+                                        return productsById[elm.id];
+                                    })).map((elm: any, i: number) => {
+                                        return (
+                                            <OrderTableItem>
+                                                <OrderColumn>
+                                                    <OCInside side="left" corner={i === searchResults.length - 1 ? "left" : ""}>
+                                                        <OrdImage src={`/assets/images/${elm.image}`} />
+                                                    </OCInside>
+                                                </OrderColumn>
+                                                <OrderColumn><OCInside side="" corner="">{elm.name}</OCInside></OrderColumn>
+                                                <OrderColumn><OCInside side="" corner="">{elm.brand}</OCInside></OrderColumn>
+                                                <OrderColumn><OCInside side="" corner="">Default</OCInside></OrderColumn>
+                                                <OrderColumn>
+                                                    <OCInside side="" corner="">
+                                                        <PopInput size={75} value={priceInp[elm.id].value} onInput={(e) => {
+                                                            inputPriceAddPopup(e.currentTarget.value, priceInp, elm.id, setPriceInp);
+                                                        }} />
+                                                    </OCInside>
+                                                </OrderColumn>
+                                                <OrderColumn>
+                                                    <OCInside side="right" corner={i === searchResults.length - 1 ? "right" : ""}>
+                                                        <PopInput size={75} value={quantityInp[elm.id].value} onInput={(e) => {
+                                                            inputQuantityAddPopup(e.currentTarget.value, quantityInp, elm.id, setQuantityInp);
+                                                        }} />
+                                                    </OCInside>
+                                                </OrderColumn>
+                                            </OrderTableItem>
+                                        );
+                                    })}
                         </BodyTable>
                     </PopSearchResults>
                 }
@@ -139,7 +149,15 @@ export default function PopupAdd(props: PopupEditProps) {
                 <PopBottomCount>
                     {selectedProdIds.length > 0 && <><Bold>Total</Bold> {selectedProdIds.length} product{selectedProdIds.length > 1 && "s"}</>}
                 </PopBottomCount>
-                <GreyButton active={selectedProdIds.length > 0}>Review</GreyButton>
+                <PopBottomButtons>
+                    <GreyButton onClick={() => {
+                        if (selectedProdIds.length > 0 || reviewMode) {
+                            setReviewMode(!reviewMode);
+                        }
+                    }} changed={reviewMode} active={selectedProdIds.length > 0}>{reviewMode ? "Back" : "Review"}</GreyButton>
+                    {reviewMode && <><ButtonDivider />
+                        <GreenButton>Add</GreenButton></>}
+                </PopBottomButtons>
             </PopBottomAdd>
         </PopupCommon>
     );

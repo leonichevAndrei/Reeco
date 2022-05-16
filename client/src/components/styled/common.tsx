@@ -58,13 +58,14 @@ export const GreenButton = styled(DefButton)`
 `;
 
 type GreyButtonProps = {
-    active: boolean
+    active: boolean,
+    changed: boolean
 }
 
 export const GreyButton = styled(DefButton)`
     border-color: ${(props: GreyButtonProps) => props.active ? "#336242" : "#b2b2b2" };
-    background-color: ${(props: GreyButtonProps) => props.active ? "#336242" : "#b2b2b2" };;
-    color: white;
+    background-color: ${(props: GreyButtonProps) => props.changed ? "white" : (props.active ? "#336242" : "#b2b2b2") };
+    color: ${(props: GreyButtonProps) => props.changed ? "#336242" : "white" };
 `;
 
 export const ButtonDivider = styled.div`

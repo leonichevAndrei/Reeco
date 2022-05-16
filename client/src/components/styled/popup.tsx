@@ -139,7 +139,14 @@ export const PopBottomAdd = styled(PopBottom)`
 export const PopBottomCount = styled.div`
     height: 30px;
     padding-left: 25px;
-    color: #3f973f;;
+    color: #3f973f;
+`;
+
+export const PopBottomButtons = styled.div`
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 `;
 
 export const PopTitle = styled.div`
