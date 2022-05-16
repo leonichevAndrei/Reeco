@@ -27,8 +27,6 @@ export default function OrderBody(props: OrderBodyProps) {
     const [searchResults, setSearchResults] = useState([]);
     const dispatch = useDispatch();
 
-    console.log(searchResults);
-
     useEffect(() => {
         if (order.items !== undefined && products.length > 0 && productsById.length > 0) {
             const searchResultsPre = order.items.filter((elm: any) => {
@@ -40,7 +38,7 @@ export default function OrderBody(props: OrderBodyProps) {
             blankItem[0] = emptyItem;
             setSearchResults(searchResultsPre.length !== 0 ? searchResultsPre : blankItem);
         }
-    }, [order, productsById, searchInp])
+    }, [order, productsById, searchInp]);
 
     function getProductStatus(status: string, updated: string[]) {
         switch (status) {

@@ -131,3 +131,7 @@ export const NoResultsBlock = styled.div`
     left: calc(50% - 15vw);
     text-align: center;
 `;
+
+export const Bold = styled.span`
+    font-weight: bold;
+`;

@@ -128,7 +128,18 @@ export const PopBottom = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: right;
+    flex-wrap: nowrap;
     padding: 10px 30px 25px 0;
+`;
+
+export const PopBottomAdd = styled(PopBottom)`
+    justify-content: space-between;
+`;
+
+export const PopBottomCount = styled.div`
+    height: 30px;
+    padding-left: 25px;
+    color: #3f973f;;
 `;
 
 export const PopTitle = styled.div`
