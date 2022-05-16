@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { updateCurrentOrder } from "../../redux/features/orders/order-slice";
+import { RootState, store } from "../../redux/store";
 import { getIDKeysArray } from "../../utill/get-arrays";
 import { inputNumsOnly } from "../../utill/input-checks";
 import { WhiteButton, ButtonDivider, GreenButton } from "../styled/common";
@@ -163,13 +164,12 @@ export default function PopupEdit(props: PopupEditProps) {
                         <WhiteButton onClick={() => closeHandler(false)} >Cancel</WhiteButton>
                         <ButtonDivider />
                         <GreenButton onClick={() => {
-                            console.log(generateNewItem());
-                            // store.dispatch(updateCurrentOrder({
-                            //     type: "order/updateItem/replaceItem",
-                            //     order: orderState.currentOrder,
-                            //     itemID: orderState.currentItemID,
-                            //     payload: generateNewItem()
-                            // }))
+                            store.dispatch(updateCurrentOrder({
+                                type: "order/updateItem/replaceItem",
+                                order: orderState.currentOrder,
+                                itemID: orderState.currentItemID,
+                                payload: generateNewItem()
+                            }))
                             setTimeout(() => closeHandler(false), 10);
                         }}>Send</GreenButton>
                     </PopBottom>

@@ -55,6 +55,16 @@ function generateOrder(data: any) {
                 (updReason: any) => updReason
             );
         };
+        case "order/updateItem/replaceItem": {
+            return getNewOrder(
+                data,
+                (price: any) => data.payload.price,
+                (quantity: any) => data.payload.quantity,
+                (status: any) => status,
+                (updated: any) => data.payload.updated,
+                (updReason: any) => data.payload.updReason
+            );
+        };
         default: return data.order;
     }
 }
