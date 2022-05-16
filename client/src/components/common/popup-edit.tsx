@@ -7,6 +7,15 @@ import { WhiteButton, ButtonDivider, GreenButton } from "../styled/common";
 import { PopTop, PopClose, PopCloseIcon, PopMiddle, PopTitle, PopCompany, PopMain, PopImageBox, PopImg, PopMainBox, PopMainLine, PopLineTitle, PopPlus, PopLineInput, PopInput, PopLinePlus, PopPlusButton, PopChooseTop, ReasonBold, ReasonGrey, PopReason, PopReasSelect, PopBottom, PopLinePlusChange } from "../styled/popup";
 import PopupCommon from "./popup-common";
 
+const reasonsObj = {
+    "missing-product": "Missing Product",
+    "quantity-not-same": "Quantity is not the same",
+    "price-not-same": "Price is not the same",
+    "other": "Other"
+}
+const reasonsObjKeys = Object.keys(reasonsObj);
+const reasonsObjVals = Object.values(reasonsObj);
+
 type PopupEditProps = {
     show: boolean,
     closeHandler: React.Dispatch<React.SetStateAction<boolean>>
@@ -22,10 +31,12 @@ export default function PopupEdit(props: PopupEditProps) {
     const [itemsById, setItemsById] = useState(new Array());
     const [priceInput, setPriceInput] = useState("");
     const [quantityInput, setQuantityInput] = useState("");
+    const [reason, setReason] = useState("");
 
     useEffect(() => {
         if (orderState.currentOrder.items !== undefined && orderState.currentItemID !== -1) {
             setItemsById(getIDKeysArray(orderState.currentOrder.items));
+            setReason("");
         }
     }, [orderState]);
 
@@ -36,11 +47,13 @@ export default function PopupEdit(props: PopupEditProps) {
         }
     }, [itemsById]);
 
-    if (itemsById.length > 0 && orderState.currentItemID !== -1 && priceInput !== "") {
-        console.log("VALS: " + itemsById[orderState.currentItemID].price + " -> " + itemsById[orderState.currentItemID].quantity);
-        console.log("NEW_VALS: " + priceInput + " -> " + quantityInput);
-    }
-    
+    useEffect(() => {
+        if (itemsById.length > 0 && orderState.currentItemID !== -1) {
+            if (itemsById[orderState.currentItemID].price == priceInput && itemsById[orderState.currentItemID].quantity == quantityInput) {
+                setReason("");
+            }
+        }
+    });
 
     return (
         <Fragment>
@@ -70,7 +83,7 @@ export default function PopupEdit(props: PopupEditProps) {
                                 <PopMainLine>
                                     <PopLineTitle>Quantity</PopLineTitle>
                                     <PopPlus>
-                                        <PopPlusButton onClick={() => parseInt(quantityInput) > 0 ? setQuantityInput((parseInt(quantityInput) - 1).toString()): void(0)}>-</PopPlusButton>
+                                        <PopPlusButton onClick={() => parseInt(quantityInput) > 0 ? setQuantityInput((parseInt(quantityInput) - 1).toString()) : void (0)}>-</PopPlusButton>
                                     </PopPlus>
                                     <PopLineInput>
                                         <PopInput size={100} value={quantityInput} onInput={(e) => inputNumsOnly(e.currentTarget.value, setQuantityInput)} />
@@ -92,10 +105,15 @@ export default function PopupEdit(props: PopupEditProps) {
                             <ReasonGrey> (optional)</ReasonGrey>
                         </PopChooseTop>
                         <PopReason>
-                            <PopReasSelect>Missing product</PopReasSelect>
-                            <PopReasSelect>Quantity is not the same</PopReasSelect>
-                            <PopReasSelect>Price is not the same</PopReasSelect>
-                            <PopReasSelect>Other</PopReasSelect>
+                            {reasonsObjKeys.map((elm, i) => {
+                                return <PopReasSelect key={i} onClick={() => {
+                                    if (itemsById[orderState.currentItemID].price != priceInput || itemsById[orderState.currentItemID].quantity != quantityInput) {
+                                        reason === elm ? setReason("") : setReason(elm);
+                                    } else {
+                                        alert("You cannot select a reason until the PRICE and/or QUANTITY changes");
+                                    }
+                                }} active={reason === elm}>{reasonsObjVals[i]}</PopReasSelect>;
+                            })}
                         </PopReason>
                     </PopMiddle>
                     <PopBottom>

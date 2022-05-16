@@ -235,16 +235,21 @@ export const PopReason = styled.div`
     padding-top: 10px;
 `;
 
+type PopReasSelectProps = {
+    active: boolean;
+}
+
 export const PopReasSelect = styled.button`
     border: 1px solid #ebebeb;
-    background-color: white;
+    background-color: ${(props: PopReasSelectProps) => props.active ? "#4bc24b" : "white"};
+    color: ${(props: PopReasSelectProps) => props.active ? "white" : "black"};
     border-radius: 20px;
     height: 35px;
     padding: 0 10px;
     font-size:0.9em;
     margin-right: 10px;
     &:hover {
-        background-color: #ebebeb;
+        background-color: ${(props: PopReasSelectProps) => props.active ? "#4bc24b" : "#ebebeb"};
     }
 `;
 
