@@ -17,8 +17,7 @@
     {
       "id": 1,
       "supplier": "East coast fruits & vegetables",
-      "shippingDate": "2012-04-23T18:25:43.511Z",
-      "total": "15,028.3",
+      "shippingDate": "2022-12-22T18:22:22.511Z",
       "categoryIDs": [
         1,
         2,
@@ -46,7 +45,7 @@
           "productID": 2,
           "price": 22,
           "quantity": 20,
-          "status": "none",
+          "status": "approved",
           "updated": [],
           "updReason": ""
         },
@@ -55,34 +54,41 @@
           "productID": 1,
           "price": 33,
           "quantity": 25,
-          "status": "none",
-          "updated": [],
-          "updReason": ""
+          "status": "approved",
+          "updated": [
+            "price"
+          ],
+          "updReason": "price-not-same"
         },
         {
           "id": 4,
           "productID": 2,
           "price": 44,
           "quantity": 30,
-          "status": "none",
-          "updated": [],
-          "updReason": ""
+          "status": "approved",
+          "updated": [
+            "quantity"
+          ],
+          "updReason": "quantity-not-same"
         },
         {
           "id": 5,
           "productID": 1,
           "price": 55,
           "quantity": 35,
-          "status": "none",
-          "updated": [],
-          "updReason": ""
+          "status": "approved",
+          "updated": [
+            "price",
+            "quantity"
+          ],
+          "updReason": "missing-product"
         },
         {
           "id": 6,
           "productID": 2,
           "price": 66,
           "quantity": 40,
-          "status": "none",
+          "status": "missing",
           "updated": [],
           "updReason": ""
         },
@@ -91,7 +97,7 @@
           "productID": 1,
           "price": 77,
           "quantity": 45,
-          "status": "none",
+          "status": "missing-urgent",
           "updated": [],
           "updReason": ""
         }

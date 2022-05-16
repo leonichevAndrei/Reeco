@@ -1,13 +1,13 @@
 export const templateOrder = {
     "id": 0,
     "supplier": "East coast fruits & vegetables",
-    "shippingDate": "2012-04-23T18:25:43.511Z",
-    "total": "15,028.3",
+    "shippingDate": "2022-12-22T18:22:22.511Z",
     "categoryIDs" : [ 1, 2, 3, 4, 5, 6, 7, 8 ],
     "department" : "300-444-678",
     "status" : "awaiting",
     "items" : [
       {
+        "id": 1,
         "productID": 1,
         "price": 11,
         "quantity": 15,
@@ -16,6 +16,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 2,
         "productID": 2,
         "price": 22,
         "quantity": 20,
@@ -24,30 +25,34 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 3,
         "productID": 1,
         "price": 33,
         "quantity": 25,
         "status": "approved",
         "updated": ["price"],
-        "updReason": "Price is not the same"
+        "updReason": "price-not-same"
       },
       {
+        "id": 4,
         "productID": 2,
         "price": 44,
         "quantity": 30,
         "status": "approved",
         "updated": ["quantity"],
-        "updReason": "Quantity is not the same"
+        "updReason": "quantity-not-same"
       },
       {
+        "id": 5,
         "productID": 1,
         "price": 55,
         "quantity": 35,
         "status": "approved",
         "updated": ["price", "quantity"],
-        "updReason": "Missing product"
+        "updReason": "missing-product"
       },
       {
+        "id": 6,
         "productID": 2,
         "price": 66,
         "quantity": 40,
@@ -56,6 +61,7 @@ export const templateOrder = {
         "updReason": ""
       },
       {
+        "id": 7,
         "productID": 1,
         "price": 77,
         "quantity": 45,
@@ -68,8 +74,7 @@ export const templateOrder = {
   export const templateOrderClean = {
     "id": 0,
     "supplier": "East coast fruits & vegetables",
-    "shippingDate": "2012-04-23T18:25:43.511Z",
-    "total": "15,028.3",
+    "shippingDate": "2022-12-22T18:22:22.511Z",
     "categoryIDs" : [ 1, 2, 3, 4, 5, 6, 7, 8 ],
     "department" : "300-444-678",
     "status" : "awaiting",

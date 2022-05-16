@@ -36,7 +36,6 @@ export default function PopupEdit(props: PopupEditProps) {
     useEffect(() => {
         if (orderState.currentOrder.items !== undefined && orderState.currentItemID !== -1) {
             setItemsById(getIDKeysArray(orderState.currentOrder.items));
-            setReason("");
         }
     }, [orderState]);
 
@@ -44,16 +43,40 @@ export default function PopupEdit(props: PopupEditProps) {
         if (itemsById.length > 0) {
             setPriceInput(itemsById[orderState.currentItemID].price);
             setQuantityInput(itemsById[orderState.currentItemID].quantity);
+            setReason(itemsById[orderState.currentItemID].updReason);
         }
     }, [itemsById]);
 
     useEffect(() => {
         if (itemsById.length > 0 && orderState.currentItemID !== -1) {
-            if (itemsById[orderState.currentItemID].price == priceInput && itemsById[orderState.currentItemID].quantity == quantityInput) {
-                setReason("");
+            if (itemsById[orderState.currentItemID].price == priceInput
+                && itemsById[orderState.currentItemID].quantity == quantityInput) {
+                if (itemsById[orderState.currentItemID].updReason === "") {
+                    setReason("");
+                }
             }
         }
     });
+
+    function generateNewItem() {
+        if (itemsById.length > 0 && orderState.currentItemID !== -1) {
+            const updated = new Array();
+            if (itemsById[orderState.currentItemID].price != priceInput) {
+                updated.push("price");
+            }
+            if (itemsById[orderState.currentItemID].quantity != quantityInput) {
+                updated.push("quantity");
+            }
+            return {
+                ...itemsById[orderState.currentItemID],
+                "price": parseInt(priceInput),
+                "quantity": parseInt(quantityInput),
+                "updated": updated,
+                "updReason": reason
+            };
+        }
+        return {};
+    }
 
     return (
         <Fragment>
@@ -76,22 +99,40 @@ export default function PopupEdit(props: PopupEditProps) {
                                     <PopLineTitle>Price ($)</PopLineTitle>
                                     <PopPlus />
                                     <PopLineInput>
-                                        <PopInput size={100} value={priceInput} onInput={(e) => inputNumsOnly(e.currentTarget.value, setPriceInput)} />
+                                        <PopInput
+                                            size={100}
+                                            value={priceInput}
+                                            onInput={(e) => inputNumsOnly(e.currentTarget.value, setPriceInput)}
+                                        />
                                     </PopLineInput>
-                                    <PopLinePlusChange>{itemsById[orderState.currentItemID].price != priceInput && "(changed)"}</PopLinePlusChange>
+                                    <PopLinePlusChange>
+                                        {itemsById[orderState.currentItemID].price != priceInput && "(changed)"}
+                                    </PopLinePlusChange>
                                 </PopMainLine>
                                 <PopMainLine>
                                     <PopLineTitle>Quantity</PopLineTitle>
                                     <PopPlus>
-                                        <PopPlusButton onClick={() => parseInt(quantityInput) > 0 ? setQuantityInput((parseInt(quantityInput) - 1).toString()) : void (0)}>-</PopPlusButton>
+                                        <PopPlusButton
+                                            onClick={() => parseInt(quantityInput) > 0
+                                                ? setQuantityInput((parseInt(quantityInput) - 1).toString())
+                                                : void (0)}
+                                        >-</PopPlusButton>
                                     </PopPlus>
                                     <PopLineInput>
-                                        <PopInput size={100} value={quantityInput} onInput={(e) => inputNumsOnly(e.currentTarget.value, setQuantityInput)} />
+                                        <PopInput
+                                            size={100}
+                                            value={quantityInput}
+                                            onInput={(e) => inputNumsOnly(e.currentTarget.value, setQuantityInput)}
+                                        />
                                     </PopLineInput>
                                     <PopPlus>
-                                        <PopPlusButton onClick={() => setQuantityInput((parseInt(quantityInput) + 1).toString())}>+</PopPlusButton>
+                                        <PopPlusButton
+                                            onClick={() => setQuantityInput((parseInt(quantityInput) + 1).toString())}
+                                        >+</PopPlusButton>
                                     </PopPlus>
-                                    <PopLinePlusChange>{itemsById[orderState.currentItemID].quantity != quantityInput && "(changed)"}</PopLinePlusChange>
+                                    <PopLinePlusChange>
+                                        {itemsById[orderState.currentItemID].quantity != quantityInput && "(changed)"}
+                                    </PopLinePlusChange>
                                 </PopMainLine>
                                 <PopMainLine>
                                     <PopLineTitle>Total</PopLineTitle>
@@ -107,7 +148,9 @@ export default function PopupEdit(props: PopupEditProps) {
                         <PopReason>
                             {reasonsObjKeys.map((elm, i) => {
                                 return <PopReasSelect key={i} onClick={() => {
-                                    if (itemsById[orderState.currentItemID].price != priceInput || itemsById[orderState.currentItemID].quantity != quantityInput) {
+                                    if (itemsById[orderState.currentItemID].price != priceInput
+                                        || itemsById[orderState.currentItemID].quantity != quantityInput
+                                        || itemsById[orderState.currentItemID].updReason !== "") {
                                         reason === elm ? setReason("") : setReason(elm);
                                     } else {
                                         alert("You cannot select a reason until the PRICE and/or QUANTITY changes");
@@ -119,7 +162,16 @@ export default function PopupEdit(props: PopupEditProps) {
                     <PopBottom>
                         <WhiteButton onClick={() => closeHandler(false)} >Cancel</WhiteButton>
                         <ButtonDivider />
-                        <GreenButton>Send</GreenButton>
+                        <GreenButton onClick={() => {
+                            console.log(generateNewItem());
+                            // store.dispatch(updateCurrentOrder({
+                            //     type: "order/updateItem/replaceItem",
+                            //     order: orderState.currentOrder,
+                            //     itemID: orderState.currentItemID,
+                            //     payload: generateNewItem()
+                            // }))
+                            setTimeout(() => closeHandler(false), 10);
+                        }}>Send</GreenButton>
                     </PopBottom>
                 </PopupCommon>
             }

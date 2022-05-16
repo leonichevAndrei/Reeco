@@ -18,10 +18,10 @@ export default function OrderBody(props: OrderBodyProps) {
 
     const { addPopupHandler, editPopupHandler, dialPopupHandler } = props;
 
-    const [searchInp, setSearchInp] = useState("");
     const order = useSelector((store: RootState) => store.order.currentOrder);
     const products = useSelector((store: RootState) => store.products.productsArr);
     const productsById = useMemo(() => getIDKeysArray(products), [products]);
+    const [searchInp, setSearchInp] = useState("");
     const dispatch = useDispatch();
 
     function getProductStatus(status: string, updated: string[]) {
@@ -50,7 +50,12 @@ export default function OrderBody(props: OrderBodyProps) {
             <BodyInnerBlock>
                 <BodyTop>
                     <SearchBlock>
-                        <SearchInput value={searchInp} onInput={(e) => setSearchInp(e.currentTarget.value)} size={100} placeholder="Search..." />
+                        <SearchInput
+                            value={searchInp}
+                            onInput={(e) => setSearchInp(e.currentTarget.value)}
+                            size={100}
+                            placeholder="Search..."
+                        />
                     </SearchBlock>
                     <AdditionalBlock>
                         <AddItem>
