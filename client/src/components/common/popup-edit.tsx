@@ -81,7 +81,10 @@ export default function PopupEdit(props: PopupEditProps) {
 
     return (
         <Fragment>
-            {itemsById.length > 0 &&
+            {productsById.length && 
+            itemsById.length > 0 && 
+            orderState.currentItemID !== -1 && 
+            itemsById[orderState.currentItemID].productID !== undefined &&
                 <PopupCommon size={60} show={show} closeHandler={closeHandler}>
                     <PopTop>
                         <PopClose>

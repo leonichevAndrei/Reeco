@@ -159,7 +159,7 @@ export default function PopupAdd(props: PopupEditProps) {
                                                 </OrderColumn>
                                                 <OrderColumn>
                                                     <OCInside side="right" corner={i === searchResults.length - 1 ? "right" : ""}>
-                                                        <PopInput size={75} value={quantityInp[elm.id].value} onInput={(e) => {
+                                                        <PopInput placeholder="-" size={75} value={quantityInp[elm.id].value} onInput={(e) => {
                                                             inputQuantityAddPopup(e.currentTarget.value, quantityInp, elm.id, setQuantityInp);
                                                         }} />
                                                     </OCInside>
