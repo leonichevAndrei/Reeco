@@ -33,7 +33,7 @@ function generateOrder(data: any) {
         case "order/updateItem/setMissing":
         case "order/updateItem/setMissingUrgent":
         case "order/updateItem/setNone": {
-            return getNewOrder(
+            return getOrderWithUpdItems(
                 data,
                 (price: any) => price,
                 (quantity: any) => quantity,
@@ -56,7 +56,7 @@ function generateOrder(data: any) {
             );
         };
         case "order/updateItem/replaceItem": {
-            return getNewOrder(
+            return getOrderWithUpdItems(
                 data,
                 (price: any) => data.payload.price,
                 (quantity: any) => data.payload.quantity,
@@ -74,11 +74,17 @@ function generateOrder(data: any) {
                 ]
             }
         }
+        case "order/updateOrder/changeStatus" : {
+            return {
+                ...data.order,
+                status: data.order.status === "awaiting" ? "approved" : "awaiting"
+            }
+        }
         default: return data.order;
     }
 }
 
-function getNewOrder(data: any, priceCallback: any, quantityCallback: any, statusCallback: any, updatedCallback: any, updReasonCallback: any) {
+function getOrderWithUpdItems(data: any, priceCallback: any, quantityCallback: any, statusCallback: any, updatedCallback: any, updReasonCallback: any) {
     const orderItems = getIDKeysArray(data.order.items);
     let item = orderItems[data.itemID];
     orderItems[data.itemID] = {

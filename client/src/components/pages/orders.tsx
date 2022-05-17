@@ -25,7 +25,7 @@ export default function Orders() {
             </SubNav>
             <BodyBlock>
                 <BodyInnerBlock>
-                    <ListTitle>Non approved orders List:</ListTitle>
+                    <ListTitle>List of all Orders:</ListTitle>
                     <EmptySpace size={5} />
                     {ordersIDs.length > 0 && ordersIDs.map((elm: any, i: any) => {
                         return (

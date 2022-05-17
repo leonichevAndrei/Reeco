@@ -75,7 +75,7 @@ export default function OrderBody(props: OrderBodyProps) {
                     </SearchBlock>
                     <AdditionalBlock>
                         <AddItem>
-                            <WhiteButton onClick={() => addPopupHandler(true)}>Add item</WhiteButton>
+                            <WhiteButton onClick={() => order.status === "awaiting" && addPopupHandler(true)}>Add item</WhiteButton>
                         </AddItem>
                         <PrintOrder>
                             <PrintOrderIcon size={24} onClick={() => alert("Printing...")} />
@@ -118,31 +118,36 @@ export default function OrderBody(props: OrderBodyProps) {
                                                         <Status>
                                                             <StatusMess type={elm.status}>{getProductStatus(elm.status, elm.updated)}</StatusMess>
                                                         </Status>
-                                                        <StatusOK onClick={() => store.dispatch(updateCurrentOrder({
-                                                            type: "order/updateItem/setApproved",
-                                                            order: order,
-                                                            itemID: elm.id
-                                                        }))}>
+                                                        <StatusOK onClick={() => order.status === "awaiting" &&
+                                                            store.dispatch(updateCurrentOrder({
+                                                                type: "order/updateItem/setApproved",
+                                                                order: order,
+                                                                itemID: elm.id
+                                                            }))}>
                                                             <StatusOKIcon color={elm.status === "approved" ? "#00cc00" : "#aaaaaa"} size={24} />
                                                         </StatusOK>
                                                         <StatusX onClick={() => {
-                                                            dispatch(setItemID(elm.id));
-                                                            if (elm.status !== "missing" && elm.status !== "missing-urgent") {
-                                                                dialPopupHandler(true);
-                                                            } else {
-                                                                store.dispatch(updateCurrentOrder({
-                                                                    type: "order/updateItem/setNone",
-                                                                    order: order,
-                                                                    itemID: elm.id
-                                                                }));
+                                                            if (order.status === "awaiting") {
+                                                                dispatch(setItemID(elm.id));
+                                                                if (elm.status !== "missing" && elm.status !== "missing-urgent") {
+                                                                    dialPopupHandler(true);
+                                                                } else {
+                                                                    store.dispatch(updateCurrentOrder({
+                                                                        type: "order/updateItem/setNone",
+                                                                        order: order,
+                                                                        itemID: elm.id
+                                                                    }));
+                                                                }
                                                             }
                                                         }}>
                                                             <StatusXIcon color={elm.status === "missing" || elm.status === "missing-urgent" ? "#cc0000" : "#aaaaaa"} size={30} />
                                                         </StatusX>
                                                         <StatusEdit>
                                                             <StatusEditLink onClick={() => {
-                                                                dispatch(setItemID(elm.id));
-                                                                editPopupHandler(true);
+                                                                if (order.status === "awaiting") {
+                                                                    dispatch(setItemID(elm.id));
+                                                                    editPopupHandler(true);
+                                                                }
                                                             }}>Edit</StatusEditLink>
                                                         </StatusEdit>
                                                     </StatusBlock>
